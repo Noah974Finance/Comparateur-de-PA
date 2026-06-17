@@ -18,16 +18,28 @@ header {visibility: hidden;}
 div[data-testid="stDecoration"] {visibility: hidden;}
 div[data-testid="stToolbar"] {visibility: hidden;}
 button[title="View source code"] {visibility: hidden;}
+
 /* Reset margins of the main block to allow maximum display area */
 .block-container {
-    padding-top: 0rem;
-    padding-bottom: 0rem;
-    padding-left: 0rem;
-    padding-right: 0rem;
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+    max-width: 100% !important;
+}
+.main, .block-container, div[data-testid="stHtml"] {
+    background-color: #080b11 !important;
+    overflow: hidden !important;
 }
 iframe {
     width: 100% !important;
+    height: 100vh !important;
+    background-color: #080b11 !important;
     border: none;
+    display: block;
+}
+div[data-testid="stHtml"] {
+    height: 100vh !important;
 }
 </style>
 """
@@ -39,6 +51,6 @@ try:
         html_content = f.read()
     
     # Affichage du comparateur dans un iframe dynamique et scrollable
-    components.html(html_content, height=1500, scrolling=True)
+    components.html(html_content, height=1000, scrolling=True)
 except Exception as e:
     st.error(f"Erreur lors du chargement du comparateur : {e}")

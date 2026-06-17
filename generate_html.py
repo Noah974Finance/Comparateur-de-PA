@@ -67,8 +67,8 @@ def build_html():
 
         /* Scrollbars custom */
         ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
         }
         ::-webkit-scrollbar-track {
             background: var(--bg-primary);
@@ -141,8 +141,8 @@ def build_html():
             margin: 0 auto;
             padding: 30px 24px;
             display: grid;
-            grid-template-columns: 310px 1fr;
-            gap: 32px;
+            grid-template-columns: 280px 1fr;
+            gap: 24px;
         }
 
         @media (max-width: 1024px) {
@@ -151,23 +151,23 @@ def build_html():
             }
         }
 
-        /* Sidebar / Filters */
+        /* Sidebar / Filters (With fixed layout scroll logic) */
         .filters-sidebar {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 24px;
-            height: fit-content;
+            padding: 18px;
             position: sticky;
             top: 24px;
-            max-height: 90vh;
+            max-height: calc(100vh - 48px);
             overflow-y: auto;
+            align-self: start; /* Prevents grid stretching */
         }
 
         .filter-section {
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 20px;
+            padding-bottom: 16px;
         }
 
         .filter-section:last-child {
@@ -307,11 +307,77 @@ def build_html():
             color: var(--text-secondary);
         }
 
+        /* Grid Layout Selector */
+        .search-controls-container {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .layout-selector {
+            display: flex;
+            gap: 4px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 4px;
+            border-radius: var(--radius-md);
+            align-items: center;
+        }
+
+        .layout-label {
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            margin: 0 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+
+        .layout-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .layout-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .layout-btn.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .search-controls-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .layout-selector {
+                justify-content: center;
+            }
+        }
+
         /* PAs Grid */
         .pas-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 20px;
+        }
+
+        @media (min-width: 1025px) {
+            .pas-grid.cols-2 { grid-template-columns: repeat(2, 1fr) !important; }
+            .pas-grid.cols-3 { grid-template-columns: repeat(3, 1fr) !important; }
+            .pas-grid.cols-4 { grid-template-columns: repeat(4, 1fr) !important; }
         }
 
         .pa-card {
@@ -323,7 +389,7 @@ def build_html():
             flex-direction: column;
             position: relative;
             transition: var(--transition);
-            min-width: 0; /* Important for grid item sizing */
+            min-width: 0;
         }
 
         .pa-card:hover {
@@ -332,7 +398,7 @@ def build_html():
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
-        /* Header row in card to prevent title text collision */
+        /* Header row in card */
         .pa-card-header {
             display: flex;
             justify-content: space-between;
@@ -445,7 +511,7 @@ def build_html():
             border: 1px solid rgba(245, 158, 11, 0.3);
         }
 
-        /* Cleaned card metadata layout with proper grid constraints */
+        /* Cleaned card metadata layout */
         .pa-meta-summary {
             padding: 16px 0;
             border-top: 1px solid var(--border);
@@ -469,7 +535,6 @@ def build_html():
             color: var(--text-primary);
             font-weight: 600;
             line-height: 1.4;
-            /* Clamp long descriptions to 2 lines to keep cards uniform */
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -558,27 +623,31 @@ def build_html():
             background: rgba(255,255,255,0.02);
         }
 
-        /* Floating Compare Action Bar */
+        /* Floating Compare Action Bar (Z-index fixed to 9999, proper translate layout) */
         .compare-bar {
             position: fixed;
             bottom: 30px;
             left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: rgba(21, 25, 34, 0.9);
+            transform: translate(-50%, 150%);
+            background: rgba(21, 25, 34, 0.95);
             border: 1px solid var(--accent);
             border-radius: var(--radius-md);
             padding: 16px 24px;
             display: flex;
             align-items: center;
             gap: 20px;
-            z-index: 100;
+            z-index: 9999;
             backdrop-filter: blur(20px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px var(--accent-glow);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s;
+            pointer-events: none;
         }
 
         .compare-bar.show {
-            transform: translateX(-50%) translateY(0);
+            transform: translate(-50%, 0);
+            opacity: 1;
+            pointer-events: all;
         }
 
         .compare-info {
@@ -606,7 +675,7 @@ def build_html():
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1000;
+            z-index: 10000; /* Higher than compare-bar */
             background: rgba(8, 11, 17, 0.95);
             backdrop-filter: blur(10px);
             display: none;
@@ -902,6 +971,45 @@ def build_html():
                     <label class="filter-checkbox">
                         <input type="checkbox" id="filter-suite"> Intégration Suite Logicielle
                     </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="filter-immatriculation"> Agrément / Immatriculée DGFIP
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">Service de Paiement</div>
+                <div class="filter-options">
+                    <label class="filter-checkbox">
+                        <input type="checkbox" class="payment-filter" value="traditionnelle"> Banque traditionnelle
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" class="payment-filter" value="neobanque"> Néobanque
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" class="payment-filter" value="aucun"> Aucun service de paiement
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">Modèle Tarifaire</div>
+                <div class="filter-options">
+                    <label class="filter-checkbox">
+                        <input type="checkbox" class="pricing-filter" value="gratuit"> 100% Gratuit / Inclus
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" class="pricing-filter" value="abonnement"> Abonnement / Forfait fixe
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" class="pricing-filter" value="volume"> Facturation au volume / usage
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="filter-maintenance"> Maintenance & Hotline incluses
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="filter-maj-gratuite"> Mises à jour gratuites
+                    </label>
                 </div>
             </div>
 
@@ -916,6 +1024,15 @@ def build_html():
                     </label>
                     <label class="filter-checkbox">
                         <input type="checkbox" id="filter-ubl"> Création UBL
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="filter-saisie"> Saisie en ligne des factures
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="filter-wf-facture"> Workflow validation factures
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="filter-wf-paiement"> Workflow validation paiements
                     </label>
                     <label class="filter-checkbox">
                         <input type="checkbox" id="filter-ereporting"> Génération e-Reporting normé
@@ -959,6 +1076,15 @@ def build_html():
                     <label class="filter-checkbox">
                         <input type="checkbox" id="filter-tableau"> Tableaux de bord de suivi
                     </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="filter-controle-validite"> Contrôle de validité des infos
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="filter-gescom"> Gestion commerciale complète
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="filter-financement"> Financement de factures
+                    </label>
                 </div>
             </div>
 
@@ -984,10 +1110,19 @@ def build_html():
         <!-- MAIN CONTENT AREA -->
         <section class="content-area">
             
-            <!-- SEARCH BAR -->
-            <div class="search-container">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="search-bar" class="search-input" placeholder="Rechercher une plateforme agréée par son nom ou mot clé...">
+            <!-- SEARCH & CONTROLS BAR -->
+            <div class="search-controls-container">
+                <div class="search-container" style="position: relative; flex-grow: 1;">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="search-bar" class="search-input" placeholder="Rechercher une plateforme agréée par son nom ou mot clé...">
+                </div>
+                <div class="layout-selector">
+                    <span class="layout-label">Colonnes</span>
+                    <button class="layout-btn active" data-cols="auto">Auto</button>
+                    <button class="layout-btn" data-cols="2">2</button>
+                    <button class="layout-btn" data-cols="3">3</button>
+                    <button class="layout-btn" data-cols="4">4</button>
+                </div>
             </div>
 
             <!-- STATISTICS -->
@@ -1252,11 +1387,25 @@ def build_html():
             // Cabinet & Suite
             const filterCabinet = document.getElementById("filter-cabinet").checked;
             const filterSuite = document.getElementById("filter-suite").checked;
+            const filterImmatriculation = document.getElementById("filter-immatriculation").checked;
+
+            // Payments
+            const paymentFilterNodes = document.querySelectorAll(".payment-filter:checked");
+            const paymentFilters = Array.from(paymentFilterNodes).map(x => x.value);
+
+            // Pricing
+            const pricingFilterNodes = document.querySelectorAll(".pricing-filter:checked");
+            const pricingFilters = Array.from(pricingFilterNodes).map(x => x.value);
+            const filterMaintenance = document.getElementById("filter-maintenance").checked;
+            const filterMajGratuite = document.getElementById("filter-maj-gratuite").checked;
 
             // Formats
             const filterFacturx = document.getElementById("filter-facturx").checked;
             const filterCii = document.getElementById("filter-cii").checked;
             const filterUbl = document.getElementById("filter-ubl").checked;
+            const filterSaisie = document.getElementById("filter-saisie").checked;
+            const filterWfFacture = document.getElementById("filter-wf-facture").checked;
+            const filterWfPaiement = document.getElementById("filter-wf-paiement").checked;
             const filterEreporting = document.getElementById("filter-ereporting").checked;
 
             // Networks
@@ -1271,13 +1420,15 @@ def build_html():
             const filterRelances = document.getElementById("filter-relances").checked;
             const filterSignature = document.getElementById("filter-signature").checked;
             const filterTableau = document.getElementById("filter-tableau").checked;
+            const filterControleValidite = document.getElementById("filter-controle-validite").checked;
+            const filterGescom = document.getElementById("filter-gescom").checked;
+            const filterFinancement = document.getElementById("filter-financement").checked;
 
             // Sec & Support
             const filterIso = document.getElementById("filter-iso").checked;
             const filterCloud = document.getElementById("filter-cloud").checked;
             const filterMobile = document.getElementById("filter-mobile").checked;
             const filterFrance = document.getElementById("filter-france").checked;
-
             const filtered = PAS_DATA.filter(pa => {
                 // Search query matching name / description / presentation
                 const nameMatch = pa.name.toLowerCase().includes(searchQuery);
@@ -1295,16 +1446,53 @@ def build_html():
                 // Cabinet & Suite
                 if (filterCabinet && !pa.general?.utilisation_cabinet_et_dossiers_clients) return false;
                 if (filterSuite && (!pa.general?.fait_partie_d_une_suite_logicielle || pa.general?.fait_partie_d_une_suite_logicielle === false)) return false;
+                if (filterImmatriculation && !pa.certification?.inscription_sur_la_liste_des_immatriculations_pa_dgfip) return false;
+
+                // Payments Filter
+                if (paymentFilters.length > 0) {
+                    const paymentVal = (pa.facturation_et_paiement?.service_de_paiement_disponible || "").toLowerCase();
+                    const paymentMatches = paymentFilters.some(pf => {
+                        if (pf === "aucun") {
+                            return paymentVal.includes("aucun") || paymentVal === "";
+                        }
+                        return paymentVal.includes(pf);
+                    });
+                    if (!paymentMatches) return false;
+                }
+
+                // Pricing Filter
+                if (pricingFilters.length > 0) {
+                    const pricingVal = (pa.structure_tarifaire?.mode_de_tarification || "").toLowerCase();
+                    const pricingMatches = pricingFilters.some(pf => {
+                        if (pf === "gratuit") {
+                            return pricingVal.includes("gratuit") || pricingVal.includes("inclus");
+                        }
+                        if (pf === "abonnement") {
+                            return pricingVal.includes("abonnement") || pricingVal.includes("forfait") || pricingVal.includes("prix compris");
+                        }
+                        if (pf === "volume") {
+                            return pricingVal.includes("volume") || pricingVal.includes("usage") || pricingVal.includes("facture émission") || pricingVal.includes("consommation");
+                        }
+                        return false;
+                    });
+                    if (!pricingMatches) return false;
+                }
+
+                if (filterMaintenance && (!pa.structure_tarifaire?.cout_de_maintenance_inclus || !pa.structure_tarifaire?.hotline_incluse)) return false;
+                if (filterMajGratuite && !pa.structure_tarifaire?.mises_a_jour_gratuites) return false;
 
                 // Formats
                 if (filterFacturx && !pa.facturation_et_paiement?.creation_ou_transformation_facture_facturx) return false;
                 if (filterCii && !pa.facturation_et_paiement?.creation_ou_transformation_facture_cii) return false;
                 if (filterUbl && !pa.facturation_et_paiement?.creation_ou_transformation_facture_ubl) return false;
+                if (filterSaisie && !pa.facturation_et_paiement?.module_de_saisie_en_ligne_des_factures) return false;
+                if (filterWfFacture && !pa.facturation_et_paiement?.gestion_des_workflows_de_validation_des_factures) return false;
+                if (filterWfPaiement && !pa.facturation_et_paiement?.gestion_des_workflows_de_validation_des_paiements) return false;
                 if (filterEreporting && !pa.services_complementaires?.generation_d_un_e_reporting_norme) return false;
 
                 // Networks
                 if (filterPeppol && !pa.interoperabilite?.point_d_acces_peppol) return false;
-                if (filterApi && (!pa.interoperabilite?.api_disponibles || pa.interoperabilite?.api_disponibles === "")) return false;
+                if (filterApi && (!pa.interoperabilite?.api_disponibles || pa.interoperabilite?.api_disponibles === false || pa.interoperabilite?.api_disponibles === "")) return false;
                 if (filterReversibilite && !pa.interoperabilite?.recuperation_simple_de_ses_donnees_changement_pa) return false;
 
                 // Services
@@ -1314,9 +1502,12 @@ def build_html():
                 if (filterRelances && !pa.services_complementaires?.gestion_des_relances_factures_clients) return false;
                 if (filterSignature && (!pa.services_complementaires?.signature_scellement_des_factures_electroniques || pa.services_complementaires?.signature_scellement_des_factures_electroniques === false)) return false;
                 if (filterTableau && !pa.services_complementaires?.generation_de_tableau_de_bord_de_suivi) return false;
+                if (filterControleValidite && !pa.services_complementaires?.module_de_controle_de_validite_des_informations) return false;
+                if (filterGescom && !pa.services_complementaires?.module_complet_de_gestion_commerciale) return false;
+                if (filterFinancement && !pa.services_complementaires?.module_de_financement_des_factures_integre) return false;
 
                 // Sec & Support
-                if (filterIso && (!pa.certification?.perimetre_de_certification_iso_27001 || pa.certification?.perimetre_de_certification_iso_27001 === "")) return false;
+                if (filterIso && (!pa.certification?.perimetre_de_certification_iso_27001 || pa.certification?.perimetre_de_certification_iso_27001 === false || pa.certification?.perimetre_de_certification_iso_27001 === "")) return false;
                 if (filterCloud && !pa.accessibilite?.acces_cloud) return false;
                 if (filterMobile && (!pa.accessibilite?.application_mobile_disponible || pa.accessibilite?.application_mobile_disponible === "Aucune")) return false;
                 if (filterFrance && !pa.support_formation?.support_situe_en_france) return false;
@@ -1499,10 +1690,19 @@ def build_html():
         document.querySelectorAll(".target-filter").forEach(cb => cb.addEventListener("change", filterData));
         document.getElementById("filter-cabinet").addEventListener("change", filterData);
         document.getElementById("filter-suite").addEventListener("change", filterData);
+        document.getElementById("filter-immatriculation").addEventListener("change", filterData);
+
+        document.querySelectorAll(".payment-filter").forEach(cb => cb.addEventListener("change", filterData));
+        document.querySelectorAll(".pricing-filter").forEach(cb => cb.addEventListener("change", filterData));
+        document.getElementById("filter-maintenance").addEventListener("change", filterData);
+        document.getElementById("filter-maj-gratuite").addEventListener("change", filterData);
         
         document.getElementById("filter-facturx").addEventListener("change", filterData);
         document.getElementById("filter-cii").addEventListener("change", filterData);
         document.getElementById("filter-ubl").addEventListener("change", filterData);
+        document.getElementById("filter-saisie").addEventListener("change", filterData);
+        document.getElementById("filter-wf-facture").addEventListener("change", filterData);
+        document.getElementById("filter-wf-paiement").addEventListener("change", filterData);
         document.getElementById("filter-ereporting").addEventListener("change", filterData);
         
         document.getElementById("filter-peppol").addEventListener("change", filterData);
@@ -1515,11 +1715,32 @@ def build_html():
         document.getElementById("filter-relances").addEventListener("change", filterData);
         document.getElementById("filter-signature").addEventListener("change", filterData);
         document.getElementById("filter-tableau").addEventListener("change", filterData);
+        document.getElementById("filter-controle-validite").addEventListener("change", filterData);
+        document.getElementById("filter-gescom").addEventListener("change", filterData);
+        document.getElementById("filter-financement").addEventListener("change", filterData);
 
         document.getElementById("filter-iso").addEventListener("change", filterData);
         document.getElementById("filter-cloud").addEventListener("change", filterData);
         document.getElementById("filter-mobile").addEventListener("change", filterData);
         document.getElementById("filter-france").addEventListener("change", filterData);
+
+        // Grid layout toggler
+        document.querySelectorAll(".layout-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".layout-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                
+                const cols = btn.getAttribute("data-cols");
+                const grid = document.getElementById("pas-grid");
+                
+                // Clear grid classes
+                grid.classList.remove("cols-2", "cols-3", "cols-4");
+                
+                if (cols !== "auto") {
+                    grid.classList.add(`cols-${cols}`);
+                }
+            });
+        });
 
         // Initial render
         window.addEventListener("DOMContentLoaded", () => {
