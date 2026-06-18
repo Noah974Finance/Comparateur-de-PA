@@ -45,21 +45,12 @@ div[data-testid="stHtml"] {
 """
 st.markdown(hide_style, unsafe_allow_html=True)
 
-# Get query parameters to handle navigation
-page = st.query_params.get("page", "comparateur")
-
-# Choose which file to read based on page parameter
-if page == "tarifs":
-    filename = "prix.html"
-else:
-    filename = "index.html"
-
 # Lecture et affichage du comparateur HTML
 try:
-    with open(filename, "r", encoding="utf-8") as f:
+    with open("index.html", "r", encoding="utf-8") as f:
         html_content = f.read()
     
     # Affichage du comparateur dans un iframe dynamique et scrollable
     components.html(html_content, height=1000, scrolling=True)
 except Exception as e:
-    st.error(f"Erreur lors du chargement de la page ({filename}) : {e}")
+    st.error(f"Erreur lors du chargement du comparateur : {e}")

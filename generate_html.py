@@ -4,9 +4,13 @@ import os
 def build_html():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(current_dir, 'PA_DATA.json')
+    prix_file_path = os.path.join(current_dir, 'prix.json')
 
     with open(file_path, 'r', encoding='utf-8') as f:
         pa_data = json.load(f)
+
+    with open(prix_file_path, 'r', encoding='utf-8') as f:
+        prix_data = json.load(f)
 
     # Sort PAs by name alphabetically
     pa_data.sort(key=lambda x: x["name"].upper())
@@ -951,6 +955,252 @@ def build_html():
             border-radius: var(--radius-lg);
             color: var(--text-secondary);
         }
+
+        /* ── PAGE SWITCHER ── */
+        .app-page {
+            display: none;
+        }
+        .app-page.active {
+            display: block;
+        }
+
+        /* ── STATS (Tarifs Page) ── */
+        .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-secondary);
+        }
+        .stat-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 20px;
+            min-width: 120px;
+        }
+        .stat-box-val { font-family: 'Outfit', sans-serif; font-size: 1.75rem; font-weight: 900; line-height: 1; }
+        .stat-box-lbl { font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-dim); }
+        .c-green  { color: var(--green); }
+        .c-amber  { color: #fbbf24; }
+        .c-blue   { color: #3b82f6;  }
+        .c-purple { color: #a855f7;}
+        .c-accent { color: var(--accent);}
+
+        /* ── CONTROLS (Tarifs Page) ── */
+        .tarifs-controls {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            padding: 18px 24px;
+        }
+        .tarifs-search-wrap { position: relative; flex: 1; min-width: 220px; }
+        .tarifs-search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: .95rem; pointer-events: none; }
+        .tarifs-search-inp {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 10px 14px 10px 40px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: .87rem;
+            outline: none;
+            transition: var(--transition);
+        }
+        .tarifs-search-inp::placeholder { color: var(--text-dim); }
+        .tarifs-search-inp:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        
+        .tarifs-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+        .tarifs-chip {
+            padding: 8px 14px; border-radius: 7px; font-size: .78rem; font-weight: 700;
+            border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary);
+            cursor: pointer; transition: var(--transition);
+        }
+        .tarifs-chip:hover { border-color: var(--accent); color: #a5b4fc; }
+        .tarifs-chip.on { background: var(--accent-glow); border-color: var(--accent); color: #c7d2fe; }
+        
+        .tarifs-sort-sel {
+            background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary);
+            padding: 8px 13px; border-radius: 7px; font-size: .78rem; font-weight: 600;
+            font-family: inherit; cursor: pointer; outline: none;
+        }
+        .tarifs-count { color: var(--text-dim); font-size: .78rem; font-weight: 700; padding: 8px 4px; white-space: nowrap; }
+
+        /* ── SECTION HEADER ── */
+        .tarifs-section-hdr {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 24px 24px 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: .92rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .tarifs-section-hdr::after { content:''; flex:1; height:1px; background: var(--border); }
+
+        /* ── CALENDRIER ── */
+        .tarifs-cal-row {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 0 24px;
+        }
+        @media(max-width:768px){ .tarifs-cal-row { grid-template-columns: 1fr; } }
+        .tarifs-cal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            text-align: center;
+        }
+        .tarifs-cal-date { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--accent); margin-bottom: 6px; }
+        .tarifs-cal-lbl { font-size: .8rem; color: var(--text-secondary); line-height: 1.5; }
+
+        /* ── SYNTHESE ── */
+        .tarifs-synth-row {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+            padding: 0 24px;
+        }
+        .tarifs-synth-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+        }
+        .tarifs-synth-title {
+            font-family: 'Outfit', sans-serif; font-size: .75rem; font-weight: 800;
+            color: #a5b4fc; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px;
+        }
+        .tarifs-synth-list { display: flex; flex-direction: column; gap: 6px; }
+        .tarifs-synth-item { display: flex; align-items: flex-start; gap: 8px; font-size: .8rem; color: var(--text-secondary); }
+        .tarifs-bullet { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+        .tarifs-b-green  { background: var(--green); }
+        .tarifs-b-blue   { background: #3b82f6;  }
+        .tarifs-b-amber  { background: #f59e0b; }
+        .tarifs-b-gray   { background: var(--text-dim); }
+        .tarifs-synth-item strong { color: var(--text-primary); }
+
+        /* ── GRID ── */
+        .tarifs-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 16px;
+            padding: 0 24px 60px;
+        }
+
+        /* ── CARD ── */
+        .t-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .t-card::before {
+            content:'';
+            position: absolute;
+            top:0; left:0; right:0; height: 2px;
+            background: var(--gradient-hero);
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .t-card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,.5); }
+        .t-card:hover::before { opacity: 1; }
+
+        .t-badge {
+            position: absolute; top: 14px; right: 14px;
+            font-size: .65rem; font-weight: 800; padding: 3px 9px; border-radius: 6px;
+            text-transform: uppercase; letter-spacing: .05em;
+        }
+        .t-badge-free    { background: var(--green-dim);  color: #34d399; border: 1px solid rgba(16,185,129,.22);  }
+        .t-badge-paid    { background: rgba(59,130,246,.10);   color: #60a5fa; border: 1px solid rgba(59,130,246,.22);   }
+        .t-badge-devis   { background: rgba(107,114,128,.10);   color: #9ca3af; border: 1px solid rgba(107,114,128,.22);   }
+        .t-badge-freemium{ background: rgba(168,85,247,.10); color: #c084fc; border: 1px solid rgba(168,85,247,.22); }
+
+        .t-card-name {
+            font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 800;
+            color: var(--text-primary); line-height: 1.25; padding-right: 72px; margin-bottom: 2px;
+        }
+        .t-card-offre { font-size: .75rem; color: var(--text-dim); margin-bottom: 12px; }
+
+        .t-card-price { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 900; line-height: 1; }
+        .t-card-price-type { font-size: .72rem; color: var(--text-dim); font-weight: 600; margin-top: 3px; margin-bottom: 14px; }
+        .t-p-free    { color: var(--green);  }
+        .t-p-paid    { color: #3b82f6;   }
+        .t-p-devis   { color: var(--text-secondary); font-size: 1.1rem; }
+        .t-p-freemium{ color: #a855f7; }
+
+        .t-card-cible {
+            display: flex; align-items: center; gap: 6px; margin-bottom: 12px;
+            font-size: .76rem; color: var(--text-dim);
+        }
+
+        .t-card-site {
+            display: flex; align-items: center; gap: 6px; margin-bottom: 12px;
+            font-size: .74rem;
+        }
+        .t-card-site a {
+            color: #a5b4fc; text-decoration: none; transition: color .2s;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 220px;
+        }
+        .t-card-site a:hover { color: #c7d2fe; text-decoration: underline; }
+
+        .t-offers { margin-bottom: 12px; }
+        .t-offers-lbl { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--text-dim); margin-bottom: 7px; }
+        .t-offer-item {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.04);
+            border-radius: 7px; padding: 7px 11px; margin-bottom: 5px;
+            font-size: .76rem; gap: 8px;
+        }
+        .t-offer-item:last-child { margin-bottom: 0; }
+        .t-offer-name { color: var(--text-secondary); font-weight: 600; }
+        .t-offer-price { color: var(--text-primary); font-weight: 700; text-align: right; }
+        .t-offer-reduce { color: var(--green); font-size: .7rem; font-weight: 700; }
+
+        .t-feats-lbl { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--text-dim); margin-bottom: 7px; }
+        .t-feats { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+        .t-feat { display: flex; align-items: flex-start; gap: 7px; font-size: .79rem; color: var(--text-secondary); line-height: 1.4; }
+        .t-feat-check { color: var(--green); font-size: .7rem; margin-top: 2px; flex-shrink: 0; }
+
+        .t-formats { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.05); }
+        .t-fmt {
+            font-size: .65rem; font-weight: 700; padding: 3px 8px; border-radius: 5px;
+            background: var(--accent-glow); color: #a5b4fc; border: 1px solid rgba(99,102,241,.2);
+        }
+
+        .t-card-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; flex-wrap: wrap; gap: 4px; }
+        .t-card-note { font-size: .72rem; color: #f59e0b; font-weight: 700; }
+        .t-card-trial { font-size: .7rem; color: var(--green); font-weight: 700; background: var(--green-dim); padding: 3px 9px; border-radius: 6px; }
+        .t-card-no-site { font-size: .7rem; color: var(--text-dim); font-style: italic; }
+
+        .t-card-contact { font-size: .7rem; color: var(--text-dim); margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -959,14 +1209,16 @@ def build_html():
     <nav class="top-nav">
         <span class="top-nav-brand">⚡ Comparateur PA</span>
         <div class="top-nav-tabs">
-            <a href="index.html" class="top-nav-tab active">🔍 Comparateur</a>
-            <a href="prix.html"  class="top-nav-tab">💶 Tarifs</a>
+            <a href="#" class="top-nav-tab active" data-page="comparateur" onclick="showPage('comparateur'); return false;">🔍 Comparateur</a>
+            <a href="#" class="top-nav-tab" data-page="tarifs" onclick="showPage('tarifs'); return false;">💶 Tarifs</a>
         </div>
-        <a href="prix.html" class="top-nav-btn">💶 Voir les tarifs →</a>
+        <a href="#" class="top-nav-btn" onclick="showPage('tarifs'); return false;">💶 Voir les tarifs →</a>
     </nav>
 
-    <!-- HERO -->
-    <header class="hero">
+    <!-- ── PAGE COMPARATEUR ── -->
+    <div id="page-comparateur" class="app-page active">
+        <!-- HERO -->
+        <header class="hero">
         <div class="badge-update">
             <span></span>
             Base de données mise à jour — Juin 2026
@@ -1186,6 +1438,75 @@ def build_html():
             </div>
         </section>
     </main>
+    </div> <!-- End of page-comparateur -->
+
+    <!-- ── PAGE TARIFS ── -->
+    <div id="page-tarifs" class="app-page">
+        <!-- HERO -->
+        <header class="hero">
+            <div class="hero-chip"><span class="dot"></span>Sources officielles — Juin 2026</div>
+            <h1>Tarifs des Plateformes Agréées</h1>
+            <p class="hero-sub">Grilles tarifaires des 47 PAs référencées par la DGFiP, collectées directement sur les sites officiels de chaque entreprise.</p>
+            <div class="hero-notice">
+                ⚠️ <span>Données issues des sites officiels de chaque PA (pas de comparateurs tiers). Les tarifs non publics sont indiqués « Sur devis ». Pour les prix exacts, contactez directement l'entreprise.</span>
+            </div>
+        </header>
+
+        <!-- STATS -->
+        <div class="stats-row">
+            <div class="stat-box"><span class="stat-box-val c-green" id="s-free">0</span><span class="stat-box-lbl">Gratuites</span></div>
+            <div class="stat-box"><span class="stat-box-val c-purple" id="s-frm">0</span><span class="stat-box-lbl">Freemium</span></div>
+            <div class="stat-box"><span class="stat-box-val c-blue" id="s-paid">0</span><span class="stat-box-lbl">Tarif public</span></div>
+            <div class="stat-box"><span class="stat-box-val c-amber" id="s-devis">0</span><span class="stat-box-lbl">Sur devis</span></div>
+            <div class="stat-box"><span class="stat-box-val c-accent" id="s-total">0</span><span class="stat-box-lbl">Total PAs</span></div>
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="tarifs-controls">
+            <div class="tarifs-search-wrap">
+                <span class="tarifs-search-icon">🔍</span>
+                <input id="tarifs-search" type="text" class="tarifs-search-inp" placeholder="Rechercher par nom, offre, cible…">
+            </div>
+            <div class="tarifs-chips">
+                <button class="tarifs-chip on"  data-f="all">Tous</button>
+                <button class="tarifs-chip"     data-f="free">✅ Gratuit</button>
+                <button class="tarifs-chip"     data-f="freemium">✨ Freemium</button>
+                <button class="tarifs-chip"     data-f="paid">💶 Tarif public</button>
+                <button class="tarifs-chip"     data-f="devis">📩 Sur devis</button>
+            </div>
+            <select id="tarifs-sort" class="tarifs-sort-sel">
+                <option value="alpha">A → Z</option>
+                <option value="pa">Prix ↑</option>
+                <option value="pd">Prix ↓</option>
+            </select>
+            <span class="tarifs-count" id="tarifs-count">47 plateformes</span>
+        </div>
+
+        <!-- CALENDRIER -->
+        <div class="tarifs-section-hdr">📅 Calendrier d'obligation</div>
+        <div class="tarifs-cal-row">
+            <div class="tarifs-cal-card">
+                <div class="tarifs-cal-date">Septembre 2026</div>
+                <div class="tarifs-cal-lbl">📥 <strong>Réception obligatoire</strong><br>pour toutes les entreprises</div>
+            </div>
+            <div class="tarifs-cal-card">
+                <div class="tarifs-cal-date">Septembre 2026</div>
+                <div class="tarifs-cal-lbl">📤 <strong>Émission obligatoire</strong><br>pour GE & ETI</div>
+            </div>
+            <div class="tarifs-cal-card">
+                <div class="tarifs-cal-date">Septembre 2027</div>
+                <div class="tarifs-cal-lbl">📤 <strong>Émission obligatoire</strong><br>pour TPE, PME & AE</div>
+            </div>
+        </div>
+
+        <!-- SYNTHESE -->
+        <div class="tarifs-section-hdr">📊 Synthèse tarifaire</div>
+        <div class="tarifs-synth-row" id="tarifs-synth-row"></div>
+
+        <!-- GRID -->
+        <div class="tarifs-section-hdr">🏢 Toutes les plateformes</div>
+        <div class="tarifs-grid" id="tarifs-grid"></div>
+    </div>
 
     <!-- FLOATING COMPARE BAR -->
     <div class="compare-bar" id="compare-bar">
@@ -1227,6 +1548,7 @@ def build_html():
     <!-- INJECT JSON DATA -->
     <script>
         const PAS_DATA = """ + json.dumps(pa_data, ensure_ascii=False) + """;
+        const PAS_TARIFS_DATA = """ + json.dumps(prix_data, ensure_ascii=False) + """;
         const selectedCompareIds = new Set();
 
         const CRITERIA_GROUPS = [
@@ -1318,6 +1640,10 @@ def build_html():
         ];
 
         // Format helper functions
+        function esc(s) {
+            return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
         function renderBool(val) {
             if (val === true || val === "true") return '<span class="val-yes">✅ Oui</span>';
             if (val === false || val === "false") return '<span class="val-no">❌ Non</span>';
@@ -1781,24 +2107,171 @@ def build_html():
             });
         });
 
-        // Initial render
+        // ── TARIFS VIEW LOGIC ──
+        const PAS_TARIFS = PAS_TARIFS_DATA.plateformes_agrees;
+
+        const SYNTH = {
+          gratuites: ["API FIRST BY DOUGS","CHAINTRUST BY VISMA","DEXT BY IRIS","DIGIPHARMACIE","INDY (Essentiel)","IPAIDTHAT","JEFACTURE.COM ECMA","KOLECTO","MACOMPTA.FR","OPEN BEE FRANCE","PENNYLANE (Plan 0€)","SUPER PDP","TIIME (Free)"],
+          prix_publics: [{nom:"Qonto",p:"9€/mois"},{nom:"Pennylane",p:"14€/mois"},{nom:"Tiime",p:"Gratuit (17,99€/mois Start)"},{nom:"Indy",p:"Gratuit (9€/mois Plus)"},{nom:"Sellsy",p:"29€/mois"},{nom:"Axonaut",p:"34,99€/mois"}],
+          fourchette: {min:"9€/mois (Qonto Basic)", max:"199€/mois (Qonto Enterprise)", moy:"15–40€/mois"},
+          inclus: ["Émission & réception factures électroniques","Conformité Factur-X, UBL 2.1, CII","Transmission au PPF et DGFiP","Archivage légal (10 ans min.)","Tableau de bord de suivi"]
+        };
+
+        function getTarifType(pa) {
+          const t = pa.type_tarification || '';
+          const p = pa.prix || '';
+          if (t === 'Freemium') return 'freemium';
+          if (p === 'Gratuit' || p.startsWith('Gratuit')) return 'free';
+          if (p === 'Sur devis' || t === 'Non public' || t.toLowerCase().includes('devis')) return 'devis';
+          return 'paid';
+        }
+
+        const T_BADGE_MAP = { free:'t-badge-free', paid:'t-badge-paid', devis:'t-badge-devis', freemium:'t-badge-freemium' };
+        const T_BADGE_LBL = { free:'Gratuit', paid:'Payant', devis:'Sur devis', freemium:'Freemium' };
+        const T_PRICE_CLS = { free:'t-p-free', paid:'t-p-paid', devis:'t-p-devis', freemium:'t-p-freemium' };
+
+        function renderTarifOffers(pa) {
+          if (!pa.offres_detaillées?.length) return '';
+          return `<div class="t-offers">
+            <div class="t-offers-lbl">Détail des offres</div>
+            ${pa.offres_detaillées.map(o => `
+              <div class="t-offer-item">
+                <span class="t-offer-name">${esc(o.nom)}</span>
+                <span class="t-offer-price">${esc(o.prix)}${o.reduction ? ` <span class="t-offer-reduce">−${o.reduction}</span>` : ''}</span>
+              </div>`).join('')}
+          </div>`;
+        }
+
+        function renderTarifCard(pa) {
+          const type = getTarifType(pa);
+          const feats = (pa.fonctionnalités_incluses || []).slice(0, 7);
+          const fmts  = pa.formats_supportés || [];
+          const noteIsNoSite = pa.note === 'Site officiel non trouvé';
+
+          return `<div class="t-card" data-type="${type}" data-p="${pa.prix_minimal_estime ?? 99999}">
+            <span class="t-badge ${T_BADGE_MAP[type]}">${T_BADGE_LBL[type]}</span>
+            <div class="t-card-name">${esc(pa.nom)}</div>
+            ${pa.offre_nom ? `<div class="t-card-offre">${esc(pa.offre_nom)}</div>` : ''}
+            <div class="t-card-price ${T_PRICE_CLS[type]}">${esc(pa.prix)}</div>
+            <div class="t-card-price-type">${esc(pa.type_tarification || '')}</div>
+            ${pa.cible && pa.cible !== 'Non spécifié' ? `<div class="t-card-cible">🎯 ${esc(pa.cible)}</div>` : ''}
+            <div class="t-card-site">
+              ${pa.site_officiel
+                ? `🌐 <a href="${esc(pa.site_officiel)}" target="_blank" rel="noopener">${esc(pa.site_officiel.replace(/^https?:\\/\\//,''))}</a>`
+                : `<span class="t-card-no-site">🔒 Site officiel non répertorié</span>`}
+            </div>
+            ${pa.contact ? `<div class="t-card-contact">✉️ ${esc(pa.contact)}</div>` : ''}
+            ${renderTarifOffers(pa)}
+            ${feats.length ? `
+              <div class="t-feats-lbl">Ce qui est inclus</div>
+              <div class="t-feats">${feats.map(f => `<div class="t-feat"><span class="t-feat-check">✔</span><span>${esc(f)}</span></div>`).join('')}</div>` : ''}
+            ${fmts.length ? `<div class="t-formats">${fmts.map(f => `<span class="t-fmt">${esc(f)}</span>`).join('')}</div>` : ''}
+            <div class="t-card-foot">
+              <span>
+                ${pa.note && !noteIsNoSite ? `<span class="t-card-note">⭐ ${esc(pa.note)}</span>` : ''}
+                ${pa.essai_gratuit ? `<span class="t-card-trial">🎁 ${esc(pa.essai_gratuit)}</span>` : ''}
+              </span>
+            </div>
+          </div>`;
+        }
+
+        function buildTarifsSynth() {
+          document.getElementById('tarifs-synth-row').innerHTML = `
+            <div class="tarifs-synth-card">
+              <div class="tarifs-synth-title">✅ Plateformes gratuites</div>
+              <div class="tarifs-synth-list">${SYNTH.gratuites.map(n => `<div class="tarifs-synth-item"><span class="tarifs-bullet tarifs-b-green"></span><span>${esc(n)}</span></div>`).join('')}</div>
+            </div>
+            <div class="tarifs-synth-card">
+              <div class="tarifs-synth-title">💶 Tarifs publics connus</div>
+              <div class="tarifs-synth-list">${SYNTH.prix_publics.map(x => `<div class="tarifs-synth-item"><span class="tarifs-bullet tarifs-b-blue"></span><span><strong>${esc(x.nom)}</strong> — ${esc(x.p)}</span></div>`).join('')}</div>
+            </div>
+            <div class="tarifs-synth-card">
+              <div class="tarifs-synth-title">📊 Fourchette tarifaire</div>
+              <div class="tarifs-synth-list">
+                <div class="tarifs-synth-item"><span class="tarifs-bullet tarifs-b-amber"></span><span>Min : <strong>${SYNTH.fourchette.min}</strong></span></div>
+                <div class="tarifs-synth-item"><span class="tarifs-bullet tarifs-b-amber"></span><span>Max : <strong>${SYNTH.fourchette.max}</strong></span></div>
+                <div class="tarifs-synth-item"><span class="tarifs-bullet tarifs-b-amber"></span><span>Moy. TPE/PME : <strong>${SYNTH.fourchette.moy}</strong></span></div>
+                <div class="tarifs-synth-item"><span class="tarifs-bullet tarifs-b-gray"></span><span>Sur devis : <strong>31 plateformes</strong></span></div>
+              </div>
+            </div>
+            <div class="tarifs-synth-card">
+              <div class="tarifs-synth-title">📦 Inclus de base (toutes PAs)</div>
+              <div class="tarifs-synth-list">${SYNTH.inclus.map(i => `<div class="tarifs-synth-item"><span class="tarifs-bullet tarifs-b-green"></span><span>${esc(i)}</span></div>`).join('')}</div>
+            </div>
+          `;
+        }
+
+        let activeTarifFilter = 'all';
+
+        function updateTarifsStats(list) {
+          document.getElementById('s-free').textContent  = list.filter(p => getTarifType(p)==='free').length;
+          document.getElementById('s-frm').textContent   = list.filter(p => getTarifType(p)==='freemium').length;
+          document.getElementById('s-paid').textContent  = list.filter(p => getTarifType(p)==='paid').length;
+          document.getElementById('s-devis').textContent = list.filter(p => getTarifType(p)==='devis').length;
+          document.getElementById('s-total').textContent = list.length;
+        }
+
+        function renderTarifs() {
+          const q    = document.getElementById('tarifs-search').value.toLowerCase().trim();
+          const sort = document.getElementById('tarifs-sort').value;
+          let list   = [...PAS_TARIFS];
+
+          if (activeTarifFilter !== 'all') list = list.filter(p => getTarifType(p) === activeTarifFilter);
+          if (q) list = list.filter(p =>
+            p.nom.toLowerCase().includes(q) ||
+            (p.offre_nom||'').toLowerCase().includes(q) ||
+            (p.cible||'').toLowerCase().includes(q) ||
+            (p.type_tarification||'').toLowerCase().includes(q) ||
+            (p.fonctionnalités_incluses||[]).some(f => f.toLowerCase().includes(q))
+          );
+
+          if (sort === 'alpha') list.sort((a,b) => a.nom.localeCompare(b.nom, 'fr'));
+          else if (sort === 'pa')   list.sort((a,b) => (a.prix_minimal_estime??99999)-(b.prix_minimal_estime??99999));
+          else if (sort === 'pd')   list.sort((a,b) => (b.prix_minimal_estime??-1)-(a.prix_minimal_estime??-1));
+
+          updateTarifsStats(list);
+          document.getElementById('tarifs-count').textContent = `${list.length} plateforme${list.length!==1?'s':''}`;
+          document.getElementById('tarifs-grid').innerHTML = list.length
+            ? list.map(renderTarifCard).join('')
+            : `<div class="empty"><div class="empty-icon">🔍</div>Aucun résultat pour cette recherche.</div>`;
+        }
+
+        // ── PAGE SWAP LOGIC ──
+        function showPage(pageId) {
+            document.querySelectorAll('.app-page').forEach(p => p.style.display = 'none');
+            document.getElementById('page-' + pageId).style.display = 'block';
+            
+            // Update active tab in nav
+            document.querySelectorAll('.top-nav-tab').forEach(tab => {
+                if (tab.getAttribute('data-page') === pageId) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+
+            // If switching to tarifs, trigger render/build once
+            if (pageId === 'tarifs') {
+                buildTarifsSynth();
+                renderTarifs();
+            }
+        }
+
+        // Initial render & setups
         window.addEventListener("DOMContentLoaded", () => {
             renderGrid(PAS_DATA);
-            
-            // Iframe navigation compatibility for Streamlit
-            const inIframe = window.self !== window.top;
-            if (inIframe) {
-                document.querySelectorAll('a').forEach(link => {
-                    const href = link.getAttribute('href');
-                    if (href === 'prix.html') {
-                        link.setAttribute('href', '?page=tarifs');
-                        link.setAttribute('target', '_parent');
-                    } else if (href === 'index.html') {
-                        link.setAttribute('href', '?page=comparateur');
-                        link.setAttribute('target', '_parent');
-                    }
+
+            // Set up Tarifs listeners
+            document.getElementById('tarifs-search').addEventListener('input', renderTarifs);
+            document.getElementById('tarifs-sort').addEventListener('change', renderTarifs);
+            document.querySelectorAll('.tarifs-chip').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.tarifs-chip').forEach(b => b.classList.remove('on'));
+                    btn.classList.add('on');
+                    activeTarifFilter = btn.dataset.f;
+                    renderTarifs();
                 });
-            }
+            });
         });
     </script>
 </body>
@@ -1809,6 +2282,26 @@ def build_html():
         f.write(html_template)
 
     print(f"HTML generated successfully with {len(pa_data)} entries.")
+
+    # Synchroniser prix.html avec le dernier prix.json
+    prix_html_path = os.path.join(current_dir, 'prix.html')
+    if os.path.exists(prix_html_path):
+        try:
+            with open(prix_html_path, 'r', encoding='utf-8') as f:
+                prix_html_content = f.read()
+            
+            import re
+            # Remplace la variable hardcodée const PAS = [...]; par les données fraîches de prix.json
+            pattern = r'const PAS\s*=\s*\[.*\]\s*;'
+            replacement = f'const PAS = {json.dumps(prix_data["plateformes_agrees"], ensure_ascii=False)};'
+            
+            new_prix_html = re.sub(pattern, replacement, prix_html_content)
+            
+            with open(prix_html_path, 'w', encoding='utf-8') as f:
+                f.write(new_prix_html)
+            print("prix.html mis à jour avec succès depuis prix.json.")
+        except Exception as e:
+            print(f"Erreur lors de la mise à jour de prix.html : {e}")
 
 if __name__ == '__main__':
     build_html()
