@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dictionnaire des Critères PA — Facturation Électronique 2026</title>
+  <meta name="description" content="Définitions simples et argumentaires de vente pour chaque critère réglementaire, technique et structurel des Plateformes Agréées (PA).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── TOKENS ── */
+    :root {
+      --bg:       #07090f;
+      --bg1:      #0d1119;
+      --bg2:      #131825;
+      --bg3:      #1a2030;
+      --border:   rgba(99,102,241,.10);
+      --border-h: rgba(99,102,241,.28);
+      --text:     #f1f3f8;
+      --text2:    #8b95a8;
+      --text3:    #545f73;
+      --accent:   #6366f1;
+      --ac-glow:  rgba(99,102,241,.18);
+      --green:    #10b981;
+      --green-bg: rgba(16,185,129,.10);
+      --green-bd: rgba(16,185,129,.22);
+      --amber:    #f59e0b;
+      --amber-bg: rgba(245,158,11,.10);
+      --amber-bd: rgba(245,158,11,.22);
+      --blue:     #3b82f6;
+      --blue-bg:  rgba(59,130,246,.10);
+      --blue-bd:  rgba(59,130,246,.22);
+      --purple:   #a855f7;
+      --purple-bg:rgba(168,85,247,.10);
+      --purple-bd:rgba(168,85,247,.22);
+      --gray-bg:  rgba(107,114,128,.10);
+      --gray-bd:  rgba(107,114,128,.22);
+      --radius:   14px;
+      --radius-s: 8px;
+      --tr:       .25s cubic-bezier(.4,0,.2,1);
+      --grad:     linear-gradient(135deg,#6366f1 0%,#a855f7 50%,#ec4899 100%);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border-h); border-radius: 99px; }
+
+    /* ── NAV BAR ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(7,9,15,.85); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 56px;
+    }
+    .nav-brand {
+      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: .95rem;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: -.02em;
+    }
+    .nav-switch {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 8px; font-size: .8rem; font-weight: 700;
+      background: var(--bg2); border: 1px solid var(--border-h); color: #a5b4fc;
+      cursor: pointer; text-decoration: none; transition: var(--tr);
+    }
+    .nav-switch:hover { background: var(--ac-glow); border-color: var(--accent); }
+    .nav-tabs { display: flex; gap: 2px; }
+    .nav-tab {
+      padding: 6px 14px; border-radius: 7px; font-size: .8rem; font-weight: 600;
+      color: var(--text2); cursor: pointer; border: none; background: none; transition: var(--tr);
+      text-decoration: none;
+    }
+    .nav-tab.active, .nav-tab:hover { background: var(--ac-glow); color: #a5b4fc; }
+    .nav-tab.active { color: #c7d2fe; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 52px 24px 36px;
+      background: radial-gradient(ellipse at 50% -10%, rgba(99,102,241,.16) 0%, transparent 60%);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .hero h1 {
+      font-family: 'Outfit', sans-serif; font-size: clamp(1.9rem,4.5vw,3.2rem);
+      font-weight: 900; letter-spacing: -.04em; line-height: 1.1;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+    .hero-sub { color: var(--text2); font-size: clamp(.9rem,2vw,1.05rem); max-width: 680px; margin: 0 auto 16px; }
+
+    /* ── CONTROLS ── */
+    .controls {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+      padding: 18px 24px;
+    }
+    .search-wrap { position: relative; flex: 1; min-width: 220px; }
+    .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: .95rem; pointer-events: none; }
+    .search-inp {
+      width: 100%; background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius-s); padding: 10px 14px 10px 40px;
+      color: var(--text); font-family: inherit; font-size: .87rem; outline: none; transition: var(--tr);
+    }
+    .search-inp::placeholder { color: var(--text3); }
+    .search-inp:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--ac-glow); }
+    .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+    .chip {
+      padding: 8px 14px; border-radius: 7px; font-size: .78rem; font-weight: 700;
+      border: 1px solid var(--border); background: var(--bg2); color: var(--text2);
+      cursor: pointer; transition: var(--tr);
+    }
+    .chip:hover { border-color: var(--accent); color: #a5b4fc; }
+    .chip.on { background: var(--ac-glow); border-color: var(--accent); color: #c7d2fe; }
+    .count { color: var(--text3); font-size: .78rem; font-weight: 700; padding: 8px 4px; white-space: nowrap; }
+
+    /* ── GRID ── */
+    .grid {
+      max-width: 1400px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(360px,1fr));
+      gap: 16px; padding: 0 24px 60px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      display: flex; flex-direction: column; gap: 12px;
+      position: relative; overflow: hidden; transition: var(--tr);
+    }
+    .card::before {
+      content:''; position: absolute; top:0; left:0; right:0; height: 2px;
+      background: var(--grad); opacity: 0; transition: opacity .3s;
+    }
+    .card:hover { border-color: var(--border-h); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,.5); }
+    .card:hover::before { opacity: 1; }
+
+    .badge {
+      align-self: start;
+      font-size: .65rem; font-weight: 800; padding: 3px 9px; border-radius: 6px;
+      text-transform: uppercase; letter-spacing: .05em;
+    }
+    .badge-general { background: var(--blue-bg); color: #60a5fa; border: 1px solid var(--blue-bd); }
+    .badge-facturation { background: var(--purple-bg); color: #c084fc; border: 1px solid var(--purple-bd); }
+    .badge-services { background: var(--green-bg); color: #34d399; border: 1px solid var(--green-bd); }
+    .badge-interoperabilite { background: var(--amber-bg); color: #fbbf24; border: 1px solid var(--amber-bd); }
+    .badge-certification { background: var(--gray-bg); color: #f87171; border: 1px solid var(--gray-bd); }
+    .badge-autres { background: var(--gray-bg); color: #9ca3af; border: 1px solid var(--gray-bd); }
+
+    .term {
+      font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 800;
+      color: var(--text);
+    }
+    .definition {
+      font-size: .88rem; color: var(--text2); line-height: 1.5;
+    }
+    .example {
+      font-size: .82rem; color: var(--text3);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 10px; border-radius: var(--radius-s);
+      border-left: 2px solid var(--border-h);
+    }
+    .pitch-box {
+      background: var(--ac-glow); border: 1px dashed rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-s); padding: 12px;
+      font-size: .85rem; color: #c7d2fe; margin-top: auto;
+    }
+    .pitch-title {
+      font-family: 'Outfit', sans-serif; font-weight: 700; font-size: .72rem;
+      text-transform: uppercase; letter-spacing: .06em; color: #a5b4fc;
+      margin-bottom: 4px;
+    }
+
+    .empty { text-align: center; padding: 60px; color: var(--text3); grid-column: 1/-1; }
+    .empty-icon { font-size: 2.5rem; margin-bottom: 10px; }
+
+    @media(max-width:600px){
+      .controls { flex-direction: column; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">⚡ Comparateur PA</span>
+  <div class="nav-tabs">
+    <a href="index.html" class="nav-tab">🔍 Comparateur</a>
+    <a href="prix.html"  class="nav-tab">💶 Tarifs</a>
+    <a href="dictionnaire.html" class="nav-tab active">📖 Dictionnaire</a>
+  </div>
+  <a href="index.html" class="nav-switch">← Retour au comparateur</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-chip">Outil interne & Conseil client</div>
+  <h1>Dictionnaire des Critères PA</h1>
+  <p class="hero-sub">Explications simplifiées de chaque fonctionnalité et argumentaires de vente pour vous aider à conseiller vos clients.</p>
+</header>
+
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input id="search" type="text" class="search-inp" placeholder="Rechercher un terme, une définition, un argument...">
+  </div>
+  <div class="chips">
+    <button class="chip on" data-cat="all">Tous</button>
+    <button class="chip" data-cat="Général">🔍 Général</button>
+    <button class="chip" data-cat="Facturation">💶 Facturation</button>
+    <button class="chip" data-cat="Services">⚙️ Services</button>
+    <button class="chip" data-cat="Interopérabilité">🌐 Interopérabilité</button>
+    <button class="chip" data-cat="Certification">🛡️ Certification</button>
+  </div>
+  <span class="count" id="count">0 termes</span>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const DICT_DATA = [{"term": "Cible visée / Typologie", "category": "Général", "definition": "Segmentation des entreprises (TPE, PME, ETI, GE) auxquelles s'adresse en priorité la plateforme.", "example": "Une offre dédiée uniquement aux Grands Groupes (GE) aura des outils complexes multi-filiales inadaptés pour un artisan.", "pitch": "Cela permet de choisir une plateforme dimensionnée pour votre structure, évitant d'acheter un outil trop complexe ou sous-dimensionné pour votre activité."}, {"term": "Usage Cabinet Experts", "category": "Général", "definition": "Indique si la plateforme dispose d'un espace de travail partagé pour les experts-comptables pour superviser leurs dossiers clients.", "example": "Votre comptable se connecte directement à votre espace pour récupérer vos factures d'achats et de ventes sans que vous ayez à les lui envoyer par email.", "pitch": "Idéal pour simplifier les échanges avec votre comptable : il récupère directement et en temps réel toutes les pièces nécessaires à la saisie de votre comptabilité."}, {"term": "Fait partie d'une suite logicielle", "category": "Général", "definition": "Indique si la plateforme de facturation est intégrée d'office dans un écosystème logiciel préexistant (ERP, CRM ou logiciel de comptabilité global).", "example": "Pennylane ou Qonto intègrent directement la gestion des factures au sein de leurs outils de tenue comptable ou de gestion bancaire.", "pitch": "Cela vous évite de multiplier les abonnements et les logiciels : la facturation est directement connectée à vos outils de gestion de trésorerie ou de comptabilité quotidienne."}, {"term": "Création / Transformation Factur-X", "category": "Facturation", "definition": "Format de facture mixte standard composé d'un fichier PDF (pour lecture humaine) et de données structurées XML (pour lecture par ordinateur).", "example": "En envoyant une Factur-X, votre client la reçoit sous forme de PDF classique, tandis que son logiciel comptable en extrait automatiquement les données sans saisie manuelle.", "pitch": "C'est le format recommandé de la réforme : il permet à la fois de lire visuellement la facture comme d'habitude et de l'automatiser instantanément pour vos destinataires."}, {"term": "Création / Transformation CII / UBL", "category": "Facturation", "definition": "Formats de factures purement structurés en données (fichiers XML sans rendu visuel par défaut), utilisés principalement pour les échanges automatisés complexes de gros volumes.", "example": "Les échanges en EDI (Échange de Données Informatisé) entre grands industriels ou acteurs de la distribution.", "pitch": "Ces formats sont obligatoires si vous travaillez avec de grands groupes ou des réseaux d'achats industriels qui automatisent entièrement leur chaîne de facturation."}, {"term": "Saisie en ligne des factures", "category": "Facturation", "definition": "Interface permettant de saisir manuellement les données de facturation directement sur le portail internet de la plateforme pour éditer une facture.", "example": "Vous remplissez le nom du client, les articles et les montants sur le site de la PA pour générer immédiatement la facture conforme.", "pitch": "Utile si vous émettez peu de factures par mois : pas besoin d'acheter un logiciel de facturation complet, vous pouvez tout faire directement et gratuitement en ligne."}, {"term": "Workflow de validation des factures", "category": "Facturation", "definition": "Circuit d'approbation permettant de faire valider une facture par différents responsables internes avant son envoi.", "example": "Une facture fournisseur reçue doit être validée par le chef de chantier, puis par le directeur financier, avant d'être payée.", "pitch": "Cela sécurise vos processus internes : aucune facture n'est payée ou envoyée sans avoir suivi le circuit d'approbation et de contrôle défini par votre entreprise."}, {"term": "Workflow de validation des paiements", "category": "Facturation", "definition": "Circuit d'autorisation interne assurant qu'un ordre de paiement de facture fournisseur est approuvé par les signataires habilités avant exécution bancaire.", "example": "Le comptable prépare les ordres de virement dans la plateforme, mais seul le gérant a le droit de cliquer sur 'Valider le paiement' pour déclencher les débits bancaires.", "pitch": "Indispensable pour éviter les erreurs de paiement ou les fraudes en séparant la préparation de la validation finale des transactions."}, {"term": "Factures hors périmètre e-invoicing", "category": "Facturation", "definition": "Capacité de la plateforme à traiter et transmettre les factures non assujetties à l'obligation de facturation électronique domestique.", "example": "La plateforme prend en charge la facturation vers les clients étrangers (B2B international) ou vers les particuliers (B2C) via des flux d'e-reporting.", "pitch": "Vous utilisez un outil unique pour l'ensemble de votre facturation, qu'il s'agisse de clients professionnels en France, à l'étranger, ou de clients particuliers."}, {"term": "Formats hors socle minimal", "category": "Facturation", "definition": "Support de formats de facturation électronique autres que les trois standards obligatoires Factur-X, UBL, et CII.", "example": "Intégration de formats spécifiques comme l'EDIFACT (courant dans la grande distribution et l'automobile) ou l'ODETTE.", "pitch": "Essentiel si vous avez des exigences sectorielles strictes imposées par vos donneurs d'ordres majeurs."}, {"term": "Service de paiement : Banque traditionnelle VS Néobanque", "category": "Facturation", "definition": "Différence entre les modules de paiement proposés. Les banques traditionnelles s'appuient sur des comptes physiques historiques, tandis que les néobanques proposent des comptes pro numériques intégrés.", "example": "Qonto (néobanque) intègre le compte bancaire et l'outil de facturation, alors qu'une PA classique se synchronise simplement avec une banque traditionnelle (ex: CIC, BNP) via l'agrégation bancaire.", "pitch": "La néobanque offre une vitesse d'exécution inégalée avec paiement en un clic et mise à jour temps réel, tandis que la banque traditionnelle convient si vous préférez conserver votre banque historique."}, {"term": "Module OCR intégré", "category": "Services", "definition": "Technologie de reconnaissance optique de caractères (propulsée par l'IA) qui extrait automatiquement les informations des factures numérisées (nom, montants, TVA).", "example": "Vous prenez en photo une facture papier avec votre mobile et l'outil remplit automatiquement le nom du fournisseur, la date et le montant.", "pitch": "Cela supprime la saisie manuelle laborieuse de vos factures d'achat. L'IA lit le document et remplit tout à votre place en quelques secondes."}, {"term": "Rapprochement automatique", "category": "Services", "definition": "Association automatique entre une transaction bancaire (débit ou crédit) et la facture d'achat ou de vente correspondante.", "example": "Un virement de 150€ reçu sur votre compte est automatiquement lié à la facture de vente n°102 d'un montant de 150€.", "pitch": "Vous savez en temps réel quelles factures sont payées et lesquelles sont en retard, sans avoir à pointer manuellement vos relevés de compte."}, {"term": "Archivage à valeur probatoire", "category": "Services", "definition": "Stockage hautement sécurisé des factures garantissant leur intégrité, leur authenticité et leur lisibilité pendant la durée légale obligatoire (10 ans).", "example": "La facture est signée numériquement et stockée dans un coffre-fort électronique infalsifiable certifié par l'État.", "pitch": "En cas de contrôle fiscal, cet archivage a la même valeur légale que vos originaux. C'est votre garantie de sécurité et de conformité à long terme."}, {"term": "Gestion des relances factures clients", "category": "Services", "definition": "Système d'automatisation des relances par email ou SMS en cas de retard de paiement de la part d'un client.", "example": "Un email poli est automatiquement envoyé à votre client 3 jours après la date d'échéance de la facture si aucun règlement n'a été détecté.", "pitch": "Vous optimisez votre trésorerie et réduisez les impayés sans passer des heures à relancer manuellement chaque retardataire."}, {"term": "Saisie manuelle des Z de caisse", "category": "Services", "definition": "Possibilité d'enregistrer manuellement le récapitulatif quotidien des ventes d'une caisse enregistreuse (ticket Z) pour les commerces physiques.", "example": "Un commerçant saisit son chiffre d'affaires du jour en renseignant le total espèce, carte bancaire et chèque du Z de caisse de la journée.", "pitch": "Idéal pour les commerces physiques : vous centralisez dans la même plateforme vos factures clients professionnelles et vos déclarations quotidiennes de ventes comptoir."}, {"term": "Génération d'un e-Reporting normé", "category": "Services", "definition": "Transmission automatique à l'administration fiscale des données de vente B2C (particuliers) ou B2B international (hors France) requises par la réforme.", "example": "La plateforme compile les ventes de votre site e-commerce et transmet le montant global de TVA collectée directement au fisc à la fréquence légale.", "pitch": "Vous assurez votre conformité fiscale automatique pour toutes vos ventes, y compris celles qui ne nécessitent pas l'émission d'une facture électronique classique."}, {"term": "Nombre de cas d'usage gérés sur 42", "category": "Services", "definition": "Le niveau de couverture de la plateforme par rapport aux 42 cas d'usage de facturation identifiés par l'administration fiscale française.", "example": "Gestion spécifique des cas complexes comme l'autofacturation, la sous-traitance, l'affacturage, ou les factures de co-traitance.", "pitch": "Plus ce nombre est proche de 42, plus la plateforme est capable de gérer toutes les subtilités et spécificités juridiques et opérationnelles de vos transactions."}, {"term": "Module de contrôle de validité des informations", "category": "Services", "definition": "Vérification automatisée de la cohérence et de la conformité des données d'une facture avant son envoi.", "example": "L'outil vérifie si le numéro SIRET du destinataire existe, si les taux de TVA appliqués correspondent aux totaux, et si les mentions obligatoires sont présentes.", "pitch": "Cela évite les rejets de factures par vos clients ou par l'administration fiscale, réduisant ainsi les délais de paiement et les litiges administratifs."}, {"term": "Module complet de gestion commerciale", "category": "Services", "definition": "Présence d'outils de gestion de la relation client, d'édition de devis, de suivi de catalogue produits/services et de gestion de stocks.", "example": "Vous transformez un devis en facture en un clic, tout en mettant à jour automatiquement la fiche client et les stocks restants.", "pitch": "Un véritable outil tout-en-un pour piloter l'ensemble de votre activité commerciale, de la prospection jusqu'à la facturation."}, {"term": "Module de financement des factures intégré", "category": "Services", "definition": "Service d'affacturage ou d'avance de trésorerie permettant d'obtenir le paiement d'une facture client immédiatement après son émission sans attendre le délai de règlement.", "example": "Vous émettez une facture à 60 jours et demandez son financement immédiat : un partenaire financier vous verse le montant sous 24-48h moyennant une commission.", "pitch": "Un levier de trésorerie puissant pour financer rapidement votre besoin en fonds de roulement sans passer par un emprunt bancaire classique."}, {"term": "Signature / Scellement des factures", "category": "Services", "definition": "Application d'un certificat électronique (signature numérique qualifiée) garantissant que la facture n'a pas été modifiée depuis sa création.", "example": "Un document PDF scellé qui affiche un cadenas de sécurité certifiant son authenticité d'origine.", "pitch": "Une protection maximale contre la fraude à la facture et une preuve juridique incontestable en cas de litige commercial ou de contrôle fiscal."}, {"term": "Génération de tableau de bord de suivi", "category": "Services", "definition": "Visualisation graphique de vos indicateurs financiers clés (chiffre d'affaires, factures en retard, encours client, trésorerie).", "example": "Un écran d'accueil synthétique présentant des graphiques d'évolution des ventes et l'état des factures à relancer.", "pitch": "Vous pilotez votre entreprise avec des données fraîches et visuelles pour prendre les bonnes décisions au bon moment."}, {"term": "Réseau PEPPOL", "category": "Interopérabilité", "definition": "Réseau d'échange international standardisé permettant l'acheminement sécurisé des factures électroniques entre entreprises de différents pays.", "example": "Envoyer une facture électronique conforme à un client situé en Belgique ou en Allemagne directement depuis votre plateforme française.", "pitch": "Si vous travaillez avec l'étranger, c'est indispensable pour échanger des factures électroniques conformes sans vous soucier des différentes réglementations nationales."}, {"term": "APIs disponibles", "category": "Interopérabilité", "definition": "Interfaces de programmation permettant de connecter de manière automatisée la plateforme de facturation à vos logiciels internes (ERP, CRM).", "example": "Votre outil interne de gestion de stock envoie automatiquement les données à la plateforme pour générer la facture lors d'une commande.", "pitch": "Permet d'automatiser entièrement vos flux de facturation en connectant directement vos logiciels métiers sans intervention humaine."}, {"term": "Nombre de PA interfacées", "category": "Interopérabilité", "definition": "Indique le nombre de Plateformes Agréées concurrentes avec lesquelles la plateforme a déjà établi une connexion directe pour échanger des factures sans passer par le PPF.", "example": "Une PA connectée directement à 15 autres PA pour un acheminement quasi instantané des factures de ses clients.", "pitch": "Garantit des échanges plus rapides, plus fiables et directs avec vos clients et fournisseurs, indépendamment de la plateforme qu'ils utilisent."}, {"term": "Récupération simple de ses données (Changement PA)", "category": "Interopérabilité", "definition": "Facilité d'exportation de l'ensemble de votre historique de facturation et de données clients au format standardisé si vous décidez de changer de prestataire.", "example": "Un bouton permettant de télécharger une archive complète contenant toutes vos factures au format Factur-X et un fichier CSV de vos clients.", "pitch": "Vous conservez une liberté totale et n'êtes pas prisonnier de votre outil : vos données vous appartiennent et restent facilement transférables."}, {"term": "Intégration comptable", "category": "Interopérabilité", "definition": "Capacité à exporter ou transmettre automatiquement les écritures comptables vers les principaux logiciels de comptabilité du marché.", "example": "Génération automatique d'un fichier d'export au format Sage, Cegid, ou MyUnisoft contenant les journaux de vente et d'achat.", "pitch": "Votre comptabilité est pré-remplie, ce qui réduit considérablement le temps de traitement et les coûts liés à la saisie manuelle de vos factures."}, {"term": "Immatriculation PA DGFiP", "category": "Certification", "definition": "Agrément officiel délivré par la Direction Générale des Finances Publiques attestant de la totale conformité de la plateforme avec les règles de l'État.", "example": "L'inscription sur la liste officielle des Plateformes de Dématérialisation Partenaires (PDP) de l'administration fiscale.", "pitch": "C'est le gage suprême de sécurité et de conformité : la plateforme respecte à 100% le cahier des charges de la nouvelle réglementation fiscale."}, {"term": "Certification ISO 27001", "category": "Certification", "definition": "Norme internationale de référence pour la sécurité des systèmes d'information, prouvant que la plateforme applique des processus de sécurité extrêmement stricts.", "example": "La réalisation d'audits de sécurité annuels par un organisme indépendant pour vérifier la protection des serveurs hébergeant vos factures.", "pitch": "Vos données confidentielles, de facturation et vos secrets industriels sont protégés selon les exigences de sécurité les plus élevées du marché mondial."}, {"term": "Accès Cloud / SaaS", "category": "Certification", "definition": "Logiciel accessible en ligne via un navigateur web, sans aucune installation locale nécessaire sur vos ordinateurs.", "example": "Vous vous connectez à votre espace de facturation depuis n'importe quel ordinateur ou tablette connecté à internet.", "pitch": "Vous travaillez d'où vous voulez, vos données sont sauvegardées en temps réel et votre logiciel est toujours à jour sans aucune maintenance à votre charge."}, {"term": "Application mobile disponible", "category": "Certification", "definition": "Présence d'une application dédiée téléchargeable sur smartphone (iOS et Android) pour utiliser les fonctionnalités principales de la plateforme en mobilité.", "example": "Photographier un ticket de caisse depuis son téléphone pour l'envoyer directement en comptabilité ou valider une facture fournisseur en déplacement.", "pitch": "Restez réactif et gardez un œil sur votre entreprise, même en déplacement ou sur le terrain."}, {"term": "Plan de récupération cyberattaque (PRA/PCA)", "category": "Certification", "definition": "Dispositif technique assurant la continuité de l'activité (PCA) ou la restauration rapide des données (PRA) en cas d'attaque informatique majeure ou d'incendie.", "example": "Sauvegardes quotidiennes répliquées sur plusieurs serveurs géographiquement distincts permettant de relancer la plateforme en quelques heures en cas de sinistre.", "pitch": "La garantie absolue que vos données de facturation historiques ne seront pas perdues et que votre facturation ne sera pas bloquée, même en cas d'incident informatique majeur."}, {"term": "Paramétrage des droits utilisateurs", "category": "Certification", "definition": "Possibilité de restreindre l'accès à certaines fonctionnalités ou données financières selon le profil de vos collaborateurs.", "example": "Autoriser un commercial à créer des factures mais lui interdire de voir le solde bancaire de l'entreprise ou d'accéder au module d'achat.", "pitch": "Vous protégez les données sensibles de votre entreprise en donnant à chaque collaborateur uniquement les accès nécessaires à sa fonction."}, {"term": "Garantie de confidentialité des données (RGPD)", "category": "Certification", "definition": "Engagement légal et technique à ne pas exploiter, revendre ou analyser les données de vos factures et de vos clients à des fins commerciales tierces.", "example": "Le stockage souverain des données en France ou en Europe avec une politique stricte d'accès aux données uniquement pour l'acheminement légal.", "pitch": "La certitude que vos données commerciales stratégiques (tarifs, volumes, liste clients) restent strictement confidentielles et ne sont pas exploitées par des tiers."}];
+
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function getDictBadgeClass(cat) {
+  const map = {
+    'Général': 'badge-general',
+    'Facturation': 'badge-facturation',
+    'Services': 'badge-services',
+    'Interopérabilité': 'badge-interoperabilite',
+    'Certification': 'badge-certification'
+  };
+  return map[cat] || 'badge-autres';
+}
+
+let activeCat = 'all';
+
+function render() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  let list = [...DICT_DATA];
+
+  if (activeCat !== 'all') list = list.filter(item => item.category === activeCat);
+  if (q) {
+    list = list.filter(item => 
+      item.term.toLowerCase().includes(q) ||
+      item.definition.toLowerCase().includes(q) ||
+      item.example.toLowerCase().includes(q) ||
+      item.pitch.toLowerCase().includes(q)
+    );
+  }
+
+  document.getElementById('count').textContent = `${list.length} terme${list.length!==1?'s':''}`;
+  
+  const grid = document.getElementById('grid');
+  grid.innerHTML = list.length 
+    ? list.map(item => `
+      <div class="card">
+        <span class="badge ${getDictBadgeClass(item.category)}">${esc(item.category)}</span>
+        <h3 class="term">${esc(item.term)}</h3>
+        <p class="definition">${esc(item.definition)}</p>
+        ${item.example ? `<div class="example">💡 <strong>Exemple :</strong> ${esc(item.example)}</div>` : ''}
+        <div class="pitch-box">
+          <div class="pitch-title">🗣️ Argumentaire Client</div>
+          <div>${esc(item.pitch)}</div>
+        </div>
+      </div>
+    `).join('')
+    : `<div class="empty"><div class="empty-icon">🔍</div>Aucun résultat trouvé.</div>`;
+}
+
+document.getElementById('search').addEventListener('input', render);
+document.querySelectorAll('.chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    activeCat = btn.dataset.cat;
+    render();
+  });
+});
+
+// ── IFRAME NAVIGATION COMPATIBILITY ──
+const inIframe = window.self !== window.top;
+if (inIframe) {
+  document.querySelectorAll('a').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === 'prix.html' || href === 'index.html' || href === 'dictionnaire.html') {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetPage = href === 'prix.html' ? 'tarifs' : (href === 'dictionnaire.html' ? 'dictionnaire' : 'comparateur');
+        try {
+          const parentUrl = new URL(window.parent.location.href);
+          parentUrl.searchParams.set('page', targetPage);
+          window.parent.location.href = parentUrl.toString();
+        } catch (err) {
+          window.parent.location.href = "/?page=" + targetPage;
+        }
+      });
+    }
+  });
+}
+
+render();
+</script>
+</body>
+</html>
