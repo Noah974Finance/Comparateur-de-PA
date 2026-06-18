@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarifs PA — Plateformes Agréées Facturation Électronique 2026</title>
+  <meta name="description" content="Tarifs officiels des 47 Plateformes Agréées pour la facturation électronique en France. Sources : sites officiels de chaque entreprise.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── TOKENS ── */
+    :root {
+      --bg:       #07090f;
+      --bg1:      #0d1119;
+      --bg2:      #131825;
+      --bg3:      #1a2030;
+      --border:   rgba(99,102,241,.10);
+      --border-h: rgba(99,102,241,.28);
+      --text:     #f1f3f8;
+      --text2:    #8b95a8;
+      --text3:    #545f73;
+      --accent:   #6366f1;
+      --ac-glow:  rgba(99,102,241,.18);
+      --green:    #10b981;
+      --green-bg: rgba(16,185,129,.10);
+      --green-bd: rgba(16,185,129,.22);
+      --amber:    #f59e0b;
+      --amber-bg: rgba(245,158,11,.10);
+      --amber-bd: rgba(245,158,11,.22);
+      --blue:     #3b82f6;
+      --blue-bg:  rgba(59,130,246,.10);
+      --blue-bd:  rgba(59,130,246,.22);
+      --purple:   #a855f7;
+      --purple-bg:rgba(168,85,247,.10);
+      --purple-bd:rgba(168,85,247,.22);
+      --gray-bg:  rgba(107,114,128,.10);
+      --gray-bd:  rgba(107,114,128,.22);
+      --radius:   14px;
+      --radius-s: 8px;
+      --tr:       .25s cubic-bezier(.4,0,.2,1);
+      --grad:     linear-gradient(135deg,#6366f1 0%,#a855f7 50%,#ec4899 100%);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border-h); border-radius: 99px; }
+
+    /* ── NAV BAR ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(7,9,15,.85); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 56px;
+    }
+    .nav-brand {
+      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: .95rem;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: -.02em;
+    }
+    .nav-switch {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 8px; font-size: .8rem; font-weight: 700;
+      background: var(--bg2); border: 1px solid var(--border-h); color: #a5b4fc;
+      cursor: pointer; text-decoration: none; transition: var(--tr);
+    }
+    .nav-switch:hover { background: var(--ac-glow); border-color: var(--accent); }
+    .nav-tabs { display: flex; gap: 2px; }
+    .nav-tab {
+      padding: 6px 14px; border-radius: 7px; font-size: .8rem; font-weight: 600;
+      color: var(--text2); cursor: pointer; border: none; background: none; transition: var(--tr);
+      text-decoration: none;
+    }
+    .nav-tab.active, .nav-tab:hover { background: var(--ac-glow); color: #a5b4fc; }
+    .nav-tab.active { color: #c7d2fe; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 52px 24px 36px;
+      background: radial-gradient(ellipse at 50% -10%, rgba(99,102,241,.16) 0%, transparent 60%);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .hero-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--green-bg); border: 1px solid var(--green-bd);
+      color: #34d399; padding: 5px 14px; border-radius: 999px;
+      font-size: .72rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .hero-chip .dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; box-shadow: 0 0 8px var(--green); animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:.5;transform:scale(.85)} 50%{opacity:1;transform:scale(1.15)} }
+    .hero h1 {
+      font-family: 'Outfit', sans-serif; font-size: clamp(1.9rem,4.5vw,3.2rem);
+      font-weight: 900; letter-spacing: -.04em; line-height: 1.1;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+    .hero-sub { color: var(--text2); font-size: clamp(.9rem,2vw,1.05rem); max-width: 680px; margin: 0 auto 16px; }
+    .hero-notice {
+      display: inline-flex; align-items: flex-start; gap: 9px;
+      background: var(--amber-bg); border: 1px solid var(--amber-bd);
+      border-radius: var(--radius-s); padding: 10px 16px; max-width: 780px;
+      font-size: .78rem; color: #fbbf24; text-align: left; line-height: 1.5;
+    }
+
+    /* ── STATS ── */
+    .stats {
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+      padding: 20px 24px; border-bottom: 1px solid var(--border);
+      background: var(--bg1);
+    }
+    .stat {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 12px 20px; min-width: 120px;
+    }
+    .stat-val { font-family: 'Outfit', sans-serif; font-size: 1.75rem; font-weight: 900; line-height: 1; }
+    .stat-lbl { font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text3); }
+    .c-green  { color: var(--green); }
+    .c-amber  { color: var(--amber); }
+    .c-blue   { color: var(--blue);  }
+    .c-purple { color: var(--purple);}
+    .c-accent { color: var(--accent);}
+
+    /* ── CONTROLS ── */
+    .controls {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+      padding: 18px 24px;
+    }
+    .search-wrap { position: relative; flex: 1; min-width: 220px; }
+    .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: .95rem; pointer-events: none; }
+    .search-inp {
+      width: 100%; background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius-s); padding: 10px 14px 10px 40px;
+      color: var(--text); font-family: inherit; font-size: .87rem; outline: none; transition: var(--tr);
+    }
+    .search-inp::placeholder { color: var(--text3); }
+    .search-inp:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--ac-glow); }
+    .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+    .chip {
+      padding: 8px 14px; border-radius: 7px; font-size: .78rem; font-weight: 700;
+      border: 1px solid var(--border); background: var(--bg2); color: var(--text2);
+      cursor: pointer; transition: var(--tr);
+    }
+    .chip:hover { border-color: var(--accent); color: #a5b4fc; }
+    .chip.on { background: var(--ac-glow); border-color: var(--accent); color: #c7d2fe; }
+    .sort-sel {
+      background: var(--bg2); border: 1px solid var(--border); color: var(--text2);
+      padding: 8px 13px; border-radius: 7px; font-size: .78rem; font-weight: 600;
+      font-family: inherit; cursor: pointer; outline: none;
+    }
+    .count { color: var(--text3); font-size: .78rem; font-weight: 700; padding: 8px 4px; white-space: nowrap; }
+
+    /* ── CALENDRIER ── */
+    .section-hdr {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; align-items: center; gap: 10px;
+      padding: 24px 24px 10px;
+      font-family: 'Outfit', sans-serif; font-size: .92rem; font-weight: 800; color: var(--text);
+    }
+    .section-hdr::after { content:''; flex:1; height:1px; background: var(--border); }
+
+    .cal-row {
+      max-width: 1400px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 12px;
+      padding: 0 24px;
+    }
+    @media(max-width:600px){ .cal-row { grid-template-columns: 1fr; } }
+    .cal-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px; text-align: center;
+    }
+    .cal-date { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--accent); margin-bottom: 6px; }
+    .cal-lbl { font-size: .8rem; color: var(--text2); line-height: 1.5; }
+
+    /* ── SYNTHESE ── */
+    .synth-row {
+      max-width: 1400px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 12px;
+      padding: 0 24px;
+    }
+    .synth-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px;
+    }
+    .synth-title {
+      font-family: 'Outfit', sans-serif; font-size: .75rem; font-weight: 800;
+      color: #a5b4fc; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px;
+    }
+    .synth-list { display: flex; flex-direction: column; gap: 6px; }
+    .synth-item { display: flex; align-items: flex-start; gap: 8px; font-size: .8rem; color: var(--text2); }
+    .bullet { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+    .b-green  { background: var(--green); }
+    .b-blue   { background: var(--blue);  }
+    .b-amber  { background: var(--amber); }
+    .b-gray   { background: var(--text3); }
+    .synth-item strong { color: var(--text); }
+
+    /* ── GRID ── */
+    .grid {
+      max-width: 1400px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px,1fr));
+      gap: 16px; padding: 0 24px 60px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      display: flex; flex-direction: column; gap: 0;
+      position: relative; overflow: hidden; transition: var(--tr);
+    }
+    .card::before {
+      content:''; position: absolute; top:0; left:0; right:0; height: 2px;
+      background: var(--grad); opacity: 0; transition: opacity .3s;
+    }
+    .card:hover { border-color: var(--border-h); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,.5); }
+    .card:hover::before { opacity: 1; }
+
+    /* Badge */
+    .badge {
+      position: absolute; top: 14px; right: 14px;
+      font-size: .65rem; font-weight: 800; padding: 3px 9px; border-radius: 6px;
+      text-transform: uppercase; letter-spacing: .05em;
+    }
+    .badge-free    { background: var(--green-bg);  color: #34d399; border: 1px solid var(--green-bd);  }
+    .badge-paid    { background: var(--blue-bg);   color: #60a5fa; border: 1px solid var(--blue-bd);   }
+    .badge-devis   { background: var(--gray-bg);   color: #9ca3af; border: 1px solid var(--gray-bd);   }
+    .badge-freemium{ background: var(--purple-bg); color: #c084fc; border: 1px solid var(--purple-bd); }
+
+    /* Card header */
+    .card-name {
+      font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 800;
+      color: var(--text); line-height: 1.25; padding-right: 72px; margin-bottom: 2px;
+    }
+    .card-offre { font-size: .75rem; color: var(--text3); margin-bottom: 12px; }
+
+    /* Price */
+    .card-price { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 900; line-height: 1; }
+    .card-price-type { font-size: .72rem; color: var(--text3); font-weight: 600; margin-top: 3px; margin-bottom: 14px; }
+    .p-free    { color: var(--green);  }
+    .p-paid    { color: var(--blue);   }
+    .p-devis   { color: var(--text2); font-size: 1.1rem; }
+    .p-freemium{ color: var(--purple); }
+
+    /* Cible */
+    .card-cible {
+      display: flex; align-items: center; gap: 6px; margin-bottom: 12px;
+      font-size: .76rem; color: var(--text3);
+    }
+
+    /* Site officiel */
+    .card-site {
+      display: flex; align-items: center; gap: 6px; margin-bottom: 12px;
+      font-size: .74rem;
+    }
+    .card-site a {
+      color: #a5b4fc; text-decoration: none; transition: color .2s;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 220px;
+    }
+    .card-site a:hover { color: #c7d2fe; text-decoration: underline; }
+
+    /* Sub-offers */
+    .offers { margin-bottom: 12px; }
+    .offers-lbl { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); margin-bottom: 7px; }
+    .offer-item {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.04);
+      border-radius: 7px; padding: 7px 11px; margin-bottom: 5px;
+      font-size: .76rem; gap: 8px;
+    }
+    .offer-item:last-child { margin-bottom: 0; }
+    .offer-name { color: var(--text2); font-weight: 600; }
+    .offer-price { color: var(--text); font-weight: 700; text-align: right; }
+    .offer-reduce { color: var(--green); font-size: .7rem; font-weight: 700; }
+
+    /* Features */
+    .feats-lbl { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); margin-bottom: 7px; }
+    .feats { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+    .feat { display: flex; align-items: flex-start; gap: 7px; font-size: .79rem; color: var(--text2); line-height: 1.4; }
+    .feat-check { color: var(--green); font-size: .7rem; margin-top: 2px; flex-shrink: 0; }
+
+    /* Formats */
+    .formats { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.05); }
+    .fmt {
+      font-size: .65rem; font-weight: 700; padding: 3px 8px; border-radius: 5px;
+      background: var(--ac-glow); color: #a5b4fc; border: 1px solid rgba(99,102,241,.2);
+    }
+
+    /* Footer */
+    .card-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; flex-wrap: wrap; gap: 4px; }
+    .card-note { font-size: .72rem; color: var(--amber); font-weight: 700; }
+    .card-trial { font-size: .7rem; color: var(--green); font-weight: 700; background: var(--green-bg); padding: 3px 9px; border-radius: 6px; }
+    .card-no-site { font-size: .7rem; color: var(--text3); font-style: italic; }
+
+    /* Contact pill */
+    .card-contact { font-size: .7rem; color: var(--text3); margin-bottom: 10px; }
+
+    /* Empty */
+    .empty { text-align: center; padding: 60px; color: var(--text3); grid-column: 1/-1; }
+    .empty-icon { font-size: 2.5rem; margin-bottom: 10px; }
+
+    @media(max-width:600px){
+      .controls { flex-direction: column; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-brand">⚡ Comparateur PA</span>
+  <div class="nav-tabs">
+    <a href="index.html" class="nav-tab">🔍 Comparateur</a>
+    <a href="prix.html"  class="nav-tab active">💶 Tarifs</a>
+  </div>
+  <a href="index.html" class="nav-switch">← Retour au comparateur</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-chip"><span class="dot"></span>Sources officielles — Juin 2026</div>
+  <h1>Tarifs des Plateformes Agréées</h1>
+  <p class="hero-sub">Grilles tarifaires des 47 PAs référencées par la DGFiP, collectées directement sur les sites officiels de chaque entreprise.</p>
+  <div class="hero-notice">
+    ⚠️ <span>Données issues des sites officiels de chaque PA (pas de comparateurs tiers). Les tarifs non publics sont indiqués « Sur devis ». Pour les prix exacts, contactez directement l'entreprise.</span>
+  </div>
+</header>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><span class="stat-val c-green" id="s-free">0</span><span class="stat-lbl">Gratuites</span></div>
+  <div class="stat"><span class="stat-val c-purple" id="s-frm">0</span><span class="stat-lbl">Freemium</span></div>
+  <div class="stat"><span class="stat-val c-blue" id="s-paid">0</span><span class="stat-lbl">Tarif public</span></div>
+  <div class="stat"><span class="stat-val c-amber" id="s-devis">0</span><span class="stat-lbl">Sur devis</span></div>
+  <div class="stat"><span class="stat-val c-accent" id="s-total">0</span><span class="stat-lbl">Total PAs</span></div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input id="search" type="text" class="search-inp" placeholder="Rechercher par nom, offre, cible…">
+  </div>
+  <div class="chips">
+    <button class="chip on"  data-f="all">Tous</button>
+    <button class="chip"     data-f="free">✅ Gratuit</button>
+    <button class="chip"     data-f="freemium">✨ Freemium</button>
+    <button class="chip"     data-f="paid">💶 Tarif public</button>
+    <button class="chip"     data-f="devis">📩 Sur devis</button>
+  </div>
+  <select id="sort" class="sort-sel">
+    <option value="alpha">A → Z</option>
+    <option value="pa">Prix ↑</option>
+    <option value="pd">Prix ↓</option>
+  </select>
+  <span class="count" id="count">47 plateformes</span>
+</div>
+
+<!-- CALENDRIER -->
+<div class="section-hdr">📅 Calendrier d'obligation</div>
+<div class="cal-row">
+  <div class="cal-card">
+    <div class="cal-date">Septembre 2026</div>
+    <div class="cal-lbl">📥 <strong>Réception obligatoire</strong><br>pour toutes les entreprises</div>
+  </div>
+  <div class="cal-card">
+    <div class="cal-date">Septembre 2026</div>
+    <div class="cal-lbl">📤 <strong>Émission obligatoire</strong><br>pour GE & ETI</div>
+  </div>
+  <div class="cal-card">
+    <div class="cal-date">Septembre 2027</div>
+    <div class="cal-lbl">📤 <strong>Émission obligatoire</strong><br>pour TPE, PME & AE</div>
+  </div>
+</div>
+
+<!-- SYNTHESE -->
+<div class="section-hdr">📊 Synthèse tarifaire</div>
+<div class="synth-row" id="synth-row"></div>
+
+<!-- GRID -->
+<div class="section-hdr">🏢 Toutes les plateformes</div>
+<div class="grid" id="grid"></div>
+
+<script>
+// ── DATA ──
+const PAS = [{"nom":"ACCENTURE - ECOMPLY & VERIFY","offre_nom":"eComply & Verify","site_officiel":"https://spp.accenture.com/invoice-taxation-compliance","contact":"ecomplyandverify@accenture.com","prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Sur mesure pour grands groupes","cible":"Grands groupes multi-pays, multi-ERP","fonctionnalités_incluses":["Conformité e-invoicing multi-pays","Contrôle continu des taxes (CTC)","Pilotage par API","Environnements multi-ERP/EDI","Mode passe-plat pour e-reporting sans surcoût"],"formats_supportés":["Factur-X","UBL","CII"]},{"nom":"ACD-LE VILLAGE CONNECTÉ","offre_nom":"Le Village Connecté","site_officiel":"https://www.acd-groupe.fr/facture-electronique/","prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Pour cabinets comptables","cible":"Cabinets comptables, entreprises","fonctionnalités_incluses":["Optimisation digitalisation","Adaptation aux besoins des cabinets","Plateforme agréée DGFiP","Intégration processus"],"formats_supportés":["Factur-X","UBL","CII"]},{"nom":"AGENA 3000 - A3 E-INVOICING","offre_nom":"A3 E-Invoicing","site_officiel":"https://www.agena3000.com/fr/lp-a3-e-invoicing","contact":"commercial@agena3000.com","telephone":"+33 2 41 46 33 00","prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Sur mesure","cible":"Industrie, Distribution, Pharmacie, Santé","fonctionnalités_incluses":["OCR","IA","Gestion multi-entités","Solution spécialisée industrie/distribution","Plateforme agréée DGFiP définitive"],"formats_supportés":["Factur-X","UBL","CII"]},{"nom":"AGIRIS SECURITY","site_officiel":"https://www.agiris.fr/","telephone":"03 44 06 40 00","prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP","Sécurité"],"formats_supportés":["Factur-X","UBL","CII"]},{"nom":"API FIRST BY DOUGS","offre_nom":"APIFirst by Dougs","site_officiel":"https://www.francenum.gouv.fr/activateurs/dougs","prix":"Gratuit","prix_minimal_estime":0,"type_tarification":"Gratuite","cible":"Micro-entreprises, TPE, PME","fonctionnalités_incluses":["Facturation électronique gratuite","Plateforme agréée DGFiP (PDP gratuite)","Suivi temps réel des paiements","Gestion intuitive cycle de vie factures","Intégration outil comptable Dougs","Simple, fluide, sécurisé"],"formats_supportés":["Factur-X","UBL","CII"]},{"nom":"ARTÉVA","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"AXONAUT","offre_nom":"Axonaut CRM + Facturation","site_officiel":"https://axonaut.com","prix":"À partir de 34,99€/mois","prix_minimal_estime":34.99,"type_tarification":"Abonnement mensuel/annuel","cible":"PME, TPE","offres_detaillées":[{"nom":"Sans engagement","prix":"69,99€/mois","reduction":"0%"},{"nom":"Engagement 1 an","prix":"62,99€/mois","reduction":"10%"},{"nom":"Engagement 2 ans","prix":"55,99€/mois","reduction":"20%"},{"nom":"Engagement 3 ans","prix":"34,99€/mois","reduction":"50%"}],"fonctionnalités_incluses":["CRM","Facturation","Comptabilité","RH","Gestion de projet","Compte pro inclus","Plateforme agréée incluse","Toutes fonctionnalités incluses","Relances","Trésorerie","Devis"],"formats_supportés":["Factur-X","UBL","CII"],"essai_gratuit":"Oui"},{"nom":"ΑΖΟΡΙΟ (AGORI)","offre_nom":"Agori Facturation Électronique","site_officiel":"https://agori.fr/solution/facturation-electronique/","prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Automatisation transmission factures","Format Factur-X","Déclaratives automatiques","Transmission automatique données"],"formats_supportés":["Factur-X","UBL","CII"]},{"nom":"CEGID","site_officiel":"https://www.cegid.com","prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"PME, ETI","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP","Solutions comptables et financières"],"formats_supportés":["Factur-X","UBL","CII"]},{"nom":"CHAINTRUST BY VISMA","offre_nom":"Chaintrust","site_officiel":"https://www.chaintrust.io","prix":"Gratuit","prix_minimal_estime":0,"type_tarification":"Gratuite (saisie comptable)","cible":"Cabinets comptables","fonctionnalités_incluses":["Saisie comptable automatisée","Plateforme agréée (PA n°66) officielle Visma France","Conforme facturation électronique","Libère de la tenue manuelle","Demo gratuite sans engagement"],"formats_supportés":["Factur-X","UBL","CII"],"note":"PA du groupe Visma, leader européen SaaS"},{"nom":"DEXT BY IRIS","offre_nom":"Dext Facturation (Freemium)","site_officiel":"https://dext.com/fr","prix":"Gratuit","prix_minimal_estime":0,"type_tarification":"Gratuite (version allégée)","cible":"TPE/PME françaises, Experts-comptables","fonctionnalités_incluses":["Version gratuite et allégée de Dext","Comptabilité simplifiée","Facturation électronique","Plateforme agréée boostée par l'IA","Préparation réforme 2026"],"formats_supportés":["Factur-X","UBL","CII"],"note":"IA pour simplifier comptabilité"},{"nom":"DIGIPHARMACIE","site_officiel":"https://digipharmacie.fr/","contact":"jonathan.blajman@digipharmacie.fr","prix":"Gratuit","prix_minimal_estime":0,"type_tarification":"Gratuite (spécialisé pharmacie)","cible":"Officines pharmaceutiques","fonctionnalités_incluses":["Plateforme e-facture dédiée officines","Factur-X/EN-16931","Connexion PPF","Intégration logiciel pharmacie","Sécurité santé (HDS, Ségur)","Archivage fiscal","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII","EN-16931"]},{"nom":"DOXALLIA - INVOX-IA","offre_nom":"Invox-IA by Doxallia","site_officiel":"https://www.doxallia.com","prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Sur mesure ETI/GE","cible":"ETI, Grandes entreprises","fonctionnalités_incluses":["Hub de facturation électronique","Conformité robuste","Souveraineté données 100% France","Pilotage des flux","Immatriculation définitive DGFiP","Filiale Crédit Agricole"],"formats_supportés":["Factur-X","UBL","CII","Peppol"]},{"nom":"ENERJ","offre_nom":"EnerJ France","site_officiel":"https://www.enerj.fr/","contact":"contact@enerj.fr","prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"PME","fonctionnalités_incluses":["E-invoicing","Workflow automation","GED, archivage numérique probatoire","Digitalisation facture électronique","Factur-X/EN-16931","Transfert PPF","Connexion Peppol","Hébergement en France","Interface épurée","Support"],"formats_supportés":["Factur-X","UBL","CII","EN-16931"],"note":"Spécialiste français e-invoicing"},{"nom":"ESALINK - HUBTIMIZE E-INVOICING","offre_nom":"Hubtimize E-Invoicing","site_officiel":"https://www.esalink.com/pdp/","prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"SaaS","cible":"Entreprises","fonctionnalités_incluses":["Solution SaaS innovante et intuitive","Plateforme EDI et E-Invoicing","Centralise, supervise, sécurise échanges entre entreprises","Module e-Invoice cœur conformité","Gestion cycle de vie factures entrantes/sortantes","Archivage légal","Immatriculée PA définitive DGFiP"],"formats_supportés":["Factur-X","UBL","CII"]},{"nom":"ESKER","offre_nom":"Esker AP/AR Automation","site_officiel":"https://www.esker.com","prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Sur mesure selon volume","cible":"ETI et grandes entreprises","fonctionnalités_incluses":["Plateforme agréée incluse","OCR/IA avancée","Détection de fraude","E-reporting TVA","Rapprochement bancaire","Application mobile","API ouverte","Émission de factures","Réception de factures"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Leader AP/AR automation"},{"nom":"EURO-INFORMATION","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"ETI, Grandes entreprises","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP","Solutions EDI"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"FULLL","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"GENERIX","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Santé, Pharmacie","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP","Spécialisé santé/pharmacie"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"INDICOM EUROPE","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"INDY","offre_nom":"Indy Comptabilité","site_officiel":"https://www.indy.fr","prix":"Gratuit (Essentiel)","prix_minimal_estime":0,"type_tarification":"Freemium","cible":"Auto-entrepreneur, Indépendants, TPE","offres_detaillées":[{"nom":"Essentiel","prix":"Gratuit"},{"nom":"Plus","prix":"À partir de 9€/mois HT (22,90€/mois)"},{"nom":"Premium EI","prix":"À partir de 12€/mois HT (41,90€/mois)"},{"nom":"Premium Société","prix":"À partir de 12€/mois HT (49,90€/mois)"}],"fonctionnalités_incluses":["Module de facturation 100% gratuit et illimité","Facturation électronique incluse sans surcoût","Synchronisation bancaire automatique","Déclarations fiscales et TVA sans saisie manuelle","Plateforme agréée DGFiP","90 000+ utilisateurs"],"formats_supportés":["Factur-X","UBL","CII"],"note":"8.5/10","essai_gratuit":"1 mois offert"},{"nom":"IOPOLE","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"IPAIDTHAT","offre_nom":"iPaidThat","site_officiel":null,"prix":"Gratuit","prix_minimal_estime":0,"type_tarification":"Gratuite","cible":"Auto-entrepreneur, TPE","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"ITESOFT","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"ETI, Grandes entreprises","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP","Solutions EDI et dématérialisation"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"JEFACTURE.COM ECMA","offre_nom":"JEFACTURE.COM","site_officiel":null,"prix":"Gratuit","prix_minimal_estime":0,"type_tarification":"Gratuite","cible":"Auto-entrepreneur, TPE","fonctionnalités_incluses":["Facturation électronique gratuite","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"KLEKOON","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"KOLECTO","site_officiel":null,"prix":"Gratuit","prix_minimal_estime":0,"type_tarification":"Gratuite","cible":"Auto-entrepreneur, TPE","fonctionnalités_incluses":["Facturation électronique gratuite","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"MACOMPTA.FR","site_officiel":null,"prix":"Gratuit","prix_minimal_estime":0,"type_tarification":"Gratuite","cible":"Auto-entrepreneur, TPE","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP","Comptabilité"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"ΜΥΚΙΝΕΧΟ - NEXER","offre_nom":"Mykinecho - NEXER","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"N2F","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"OPEN BEE FRANCE","offre_nom":"Open Bee","site_officiel":null,"prix":"Gratuit","prix_minimal_estime":0,"type_tarification":"Gratuite","cible":"Auto-entrepreneur, TPE","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"PENNYLANE","offre_nom":"Pennylane Comptabilité & Facturation","site_officiel":"https://www.pennylane.com/fr/tarifs/large","prix":"À partir de 14€/mois","prix_minimal_estime":14,"type_tarification":"Abonnement mensuel","cible":"Auto-entrepreneur, TPE, PME","offres_detaillées":[{"nom":"Plan 0€ (micro-entreprises)","prix":"Gratuit"},{"nom":"Basique","prix":"14€/mois"},{"nom":"Essentiel","prix":"24€/mois"},{"nom":"Premium","prix":"79€/mois"},{"nom":"Entreprise","prix":"Sur devis"}],"fonctionnalités_incluses":["Facturation électronique incluse sans surcoût tous plans","Comptabilité","Trésorerie","Compte pro","Plateforme agréée DGFiP incluse"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Populaire pour TPE/PME"},{"nom":"QONTO","offre_nom":"Qonto E-Invoicing","site_officiel":"https://qonto.com/fr/invoicing/e-invoicing","prix":"À partir de 9€/mois","prix_minimal_estime":9,"type_tarification":"Abonnement mensuel","cible":"Auto-entrepreneur, TPE, PME","offres_detaillées":[{"nom":"Basic","prix":"9€/mois HT"},{"nom":"Smart","prix":"19€/mois HT"},{"nom":"Premium","prix":"39€/mois HT"},{"nom":"Essential","prix":"49€/mois HT"},{"nom":"Business","prix":"99€/mois HT"},{"nom":"Enterprise","prix":"199€/mois HT"}],"fonctionnalités_incluses":["Facturation électronique incluse sans surcoût tous forfaits","Compte pro français","Trésorerie","Plateforme agréée DGFiP incluse","100% gratuit sans compte pro (option)"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Première PA 100% opérationnelle"},{"nom":"SAGE","offre_nom":"Sage E-Invoicing","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"PME, ETI","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP","Solutions comptables et de gestion"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"SCRIBEE","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"SELLSY","offre_nom":"Sellsy","site_officiel":null,"prix":"À partir de 29€/mois","prix_minimal_estime":29,"type_tarification":"Abonnement mensuel","cible":"TPE, PME","fonctionnalités_incluses":["Facturation","Comptabilité","Trésorerie","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"SEPTO (SEPTEO)","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"SEQINO","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"SERENSIA BY QUADIENT","offre_nom":"Serensia","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Sur mesure ETI/GE","cible":"ETI, Grandes entreprises","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP","Solutions automatisation processus"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"SUPER PDP","offre_nom":"SUPER PDP","site_officiel":null,"prix":"Gratuit","prix_minimal_estime":0,"type_tarification":"Gratuite","cible":"Auto-entrepreneur, TPE","fonctionnalités_incluses":["Facturation électronique gratuite","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"SY BUSINESS - CEGEDIM","offre_nom":"SY BUSINESS","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"TIIME","offre_nom":"Tiime Facturation","site_officiel":null,"prix":"Gratuit (Free)","prix_minimal_estime":0,"type_tarification":"Freemium","cible":"Auto-entrepreneur, TPE, Expert-comptable","offres_detaillées":[{"nom":"Free","prix":"Gratuit à vie"},{"nom":"Start","prix":"17,99€/mois HT"},{"nom":"Business","prix":"17,99€/mois HT en annuel (22,99€/mois mensuel)"}],"fonctionnalités_incluses":["Facturation électronique 100% gratuite et illimitée","Devis","Comptabilité intégrée (offres payantes)","Compte pro (offre Business)","Plateforme agréée DGFiP immatriculée","Gratuit pour indépendants"],"formats_supportés":["Factur-X","UBL","CII"],"note":"8.6/10"},{"nom":"TRADESHIFT BABELWAY","offre_nom":"TradeShift Babelway","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Sur mesure multi-pays","cible":"ETI, Grandes entreprises, Multi-pays","fonctionnalités_incluses":["Facturation électronique multi-pays","Plateforme agréée DGFiP","Intégration EDI","Network global"],"formats_supportés":["Factur-X","UBL","CII","Peppol"],"note":"Site officiel non trouvé"},{"nom":"TRESO2","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP","Trésorerie"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"TX2 CLOUD","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Non public","cible":"Non spécifié","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP","Cloud"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"VOXEL, AN AMADEUS COMPANY","offre_nom":"Voxel","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Sur mesure voyage","cible":"Secteur voyage, Aviation","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP","Spécialisé voyage/aviation","Part of Amadeus"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"},{"nom":"YOOZ","offre_nom":"Yooz","site_officiel":null,"prix":"Sur devis","prix_minimal_estime":null,"type_tarification":"Sur mesure TPE/PME","cible":"TPE, PME","fonctionnalités_incluses":["Facturation électronique","Plateforme agréée DGFiP","Automatisation AP (Accounts Payable)"],"formats_supportés":["Factur-X","UBL","CII"],"note":"Site officiel non trouvé"}];
+
+const SYNTH = {
+  gratuites: ["API FIRST BY DOUGS","CHAINTRUST BY VISMA","DEXT BY IRIS","DIGIPHARMACIE","INDY (Essentiel)","IPAIDTHAT","JEFACTURE.COM ECMA","KOLECTO","MACOMPTA.FR","OPEN BEE FRANCE","PENNYLANE (Plan 0€)","SUPER PDP","TIIME (Free)"],
+  prix_publics: [{nom:"Qonto",p:"9€/mois"},{nom:"Pennylane",p:"14€/mois"},{nom:"Tiime",p:"Gratuit (17,99€/mois Start)"},{nom:"Indy",p:"Gratuit (9€/mois Plus)"},{nom:"Sellsy",p:"29€/mois"},{nom:"Axonaut",p:"34,99€/mois"}],
+  fourchette: {min:"9€/mois (Qonto Basic)", max:"199€/mois (Qonto Enterprise)", moy:"15–40€/mois"},
+  inclus: ["Émission & réception factures électroniques","Conformité Factur-X, UBL 2.1, CII","Transmission au PPF et DGFiP","Archivage légal (10 ans min.)","Tableau de bord de suivi"]
+};
+
+// ── HELPERS ──
+function getType(pa) {
+  const t = pa.type_tarification || '';
+  const p = pa.prix || '';
+  if (t === 'Freemium') return 'freemium';
+  if (p === 'Gratuit' || p.startsWith('Gratuit')) return 'free';
+  if (p === 'Sur devis' || t === 'Non public' || t.toLowerCase().includes('devis')) return 'devis';
+  return 'paid';
+}
+
+const BADGE_MAP = { free:'badge-free', paid:'badge-paid', devis:'badge-devis', freemium:'badge-freemium' };
+const BADGE_LBL = { free:'Gratuit', paid:'Payant', devis:'Sur devis', freemium:'Freemium' };
+const PRICE_CLS = { free:'p-free', paid:'p-paid', devis:'p-devis', freemium:'p-freemium' };
+
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function renderOffers(pa) {
+  if (!pa.offres_detaillées?.length) return '';
+  return `<div class="offers">
+    <div class="offers-lbl">Détail des offres</div>
+    ${pa.offres_detaillées.map(o => `
+      <div class="offer-item">
+        <span class="offer-name">${esc(o.nom)}</span>
+        <span class="offer-price">${esc(o.prix)}${o.reduction ? ` <span class="offer-reduce">−${o.reduction}</span>` : ''}</span>
+      </div>`).join('')}
+  </div>`;
+}
+
+function renderCard(pa) {
+  const type = getType(pa);
+  const feats = (pa.fonctionnalités_incluses || []).slice(0, 7);
+  const fmts  = pa.formats_supportés || [];
+  const isNoSite = !pa.site_officiel;
+  const noteIsNoSite = pa.note === 'Site officiel non trouvé';
+
+  return `<div class="card" data-type="${type}" data-p="${pa.prix_minimal_estime ?? 99999}">
+    <span class="badge ${BADGE_MAP[type]}">${BADGE_LBL[type]}</span>
+    <div class="card-name">${esc(pa.nom)}</div>
+    ${pa.offre_nom ? `<div class="card-offre">${esc(pa.offre_nom)}</div>` : ''}
+    <div class="card-price ${PRICE_CLS[type]}">${esc(pa.prix)}</div>
+    <div class="card-price-type">${esc(pa.type_tarification || '')}</div>
+    ${pa.cible && pa.cible !== 'Non spécifié' ? `<div class="card-cible">🎯 ${esc(pa.cible)}</div>` : ''}
+    <div class="card-site">
+      ${pa.site_officiel
+        ? `🌐 <a href="${esc(pa.site_officiel)}" target="_blank" rel="noopener">${esc(pa.site_officiel.replace(/^https?:\/\//,''))}</a>`
+        : `<span class="card-no-site">🔒 Site officiel non répertorié</span>`}
+    </div>
+    ${pa.contact ? `<div class="card-contact">✉️ ${esc(pa.contact)}</div>` : ''}
+    ${renderOffers(pa)}
+    ${feats.length ? `
+      <div class="feats-lbl">Ce qui est inclus</div>
+      <div class="feats">${feats.map(f => `<div class="feat"><span class="feat-check">✔</span><span>${esc(f)}</span></div>`).join('')}</div>` : ''}
+    ${fmts.length ? `<div class="formats">${fmts.map(f => `<span class="fmt">${esc(f)}</span>`).join('')}</div>` : ''}
+    <div class="card-foot">
+      <span>
+        ${pa.note && !noteIsNoSite ? `<span class="card-note">⭐ ${esc(pa.note)}</span>` : ''}
+        ${pa.essai_gratuit ? `<span class="card-trial">🎁 ${esc(pa.essai_gratuit)}</span>` : ''}
+      </span>
+    </div>
+  </div>`;
+}
+
+// ── SYNTHESE ──
+function buildSynth() {
+  document.getElementById('synth-row').innerHTML = `
+    <div class="synth-card">
+      <div class="synth-title">✅ Plateformes gratuites</div>
+      <div class="synth-list">${SYNTH.gratuites.map(n => `<div class="synth-item"><span class="bullet b-green"></span><span>${esc(n)}</span></div>`).join('')}</div>
+    </div>
+    <div class="synth-card">
+      <div class="synth-title">💶 Tarifs publics connus</div>
+      <div class="synth-list">${SYNTH.prix_publics.map(x => `<div class="synth-item"><span class="bullet b-blue"></span><span><strong>${esc(x.nom)}</strong> — ${esc(x.p)}</span></div>`).join('')}</div>
+    </div>
+    <div class="synth-card">
+      <div class="synth-title">📊 Fourchette tarifaire</div>
+      <div class="synth-list">
+        <div class="synth-item"><span class="bullet b-amber"></span><span>Min : <strong>${SYNTH.fourchette.min}</strong></span></div>
+        <div class="synth-item"><span class="bullet b-amber"></span><span>Max : <strong>${SYNTH.fourchette.max}</strong></span></div>
+        <div class="synth-item"><span class="bullet b-amber"></span><span>Moy. TPE/PME : <strong>${SYNTH.fourchette.moy}</strong></span></div>
+        <div class="synth-item"><span class="bullet b-gray"></span><span>Sur devis : <strong>31 plateformes</strong></span></div>
+      </div>
+    </div>
+    <div class="synth-card">
+      <div class="synth-title">📦 Inclus de base (toutes PAs)</div>
+      <div class="synth-list">${SYNTH.inclus.map(i => `<div class="synth-item"><span class="bullet b-green"></span><span>${esc(i)}</span></div>`).join('')}</div>
+    </div>
+  `;
+}
+
+// ── RENDER ──
+let activeFilter = 'all';
+
+function updateStats(list) {
+  document.getElementById('s-free').textContent  = list.filter(p => getType(p)==='free').length;
+  document.getElementById('s-frm').textContent   = list.filter(p => getType(p)==='freemium').length;
+  document.getElementById('s-paid').textContent  = list.filter(p => getType(p)==='paid').length;
+  document.getElementById('s-devis').textContent = list.filter(p => getType(p)==='devis').length;
+  document.getElementById('s-total').textContent = list.length;
+}
+
+function render() {
+  const q    = document.getElementById('search').value.toLowerCase().trim();
+  const sort = document.getElementById('sort').value;
+  let list   = [...PAS];
+
+  if (activeFilter !== 'all') list = list.filter(p => getType(p) === activeFilter);
+  if (q) list = list.filter(p =>
+    p.nom.toLowerCase().includes(q) ||
+    (p.offre_nom||'').toLowerCase().includes(q) ||
+    (p.cible||'').toLowerCase().includes(q) ||
+    (p.type_tarification||'').toLowerCase().includes(q) ||
+    (p.fonctionnalités_incluses||[]).some(f => f.toLowerCase().includes(q))
+  );
+
+  if (sort === 'alpha') list.sort((a,b) => a.nom.localeCompare(b.nom, 'fr'));
+  else if (sort === 'pa')   list.sort((a,b) => (a.prix_minimal_estime??99999)-(b.prix_minimal_estime??99999));
+  else if (sort === 'pd')   list.sort((a,b) => (b.prix_minimal_estime??-1)-(a.prix_minimal_estime??-1));
+
+  updateStats(list);
+  document.getElementById('count').textContent = `${list.length} plateforme${list.length!==1?'s':''}`;
+  document.getElementById('grid').innerHTML = list.length
+    ? list.map(renderCard).join('')
+    : `<div class="empty"><div class="empty-icon">🔍</div>Aucun résultat pour cette recherche.</div>`;
+}
+
+// ── EVENTS ──
+document.getElementById('search').addEventListener('input', render);
+document.getElementById('sort').addEventListener('change', render);
+document.querySelectorAll('.chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    activeFilter = btn.dataset.f;
+    render();
+  });
+});
+
+// ── IFRAME NAVIGATION COMPATIBILITY ──
+const inIframe = window.self !== window.top;
+if (inIframe) {
+  document.querySelectorAll('a').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === 'prix.html') {
+      link.setAttribute('href', '?page=tarifs');
+      link.setAttribute('target', '_parent');
+    } else if (href === 'index.html') {
+      link.setAttribute('href', '?page=comparateur');
+      link.setAttribute('target', '_parent');
+    }
+  });
+}
+
+// ── INIT ──
+buildSynth();
+render();
+</script>
+</body>
+</html>
